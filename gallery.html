@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#123b2a">
+  <meta name="description" content="View completed landscaping projects by Desert Forest Landscape in Las Vegas and surrounding areas.">
+  <title>Project Gallery | Desert Forest Landscape</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --forest: #123b2a;
+      --forest-deep: #08281c;
+      --forest-soft: #244f3a;
+      --orange: #ef6f17;
+      --orange-soft: #f3a14e;
+      --leaf: #7fa35a;
+      --cream: #f7f1e6;
+      --cream-2: #fbf8f1;
+      --ink: #0d3426;
+      --muted: #68756d;
+      --line: rgba(18, 59, 42, .13);
+      --shadow: 0 16px 42px rgba(7, 37, 25, .12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--cream-2);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    button, a { font: inherit; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(100deg, #082f20 0%, #123b2a 55%, #174a35 100%);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,.10);
+    }
+
+    .header-inner {
+      width: min(100% - 44px, 1480px);
+      min-height: 94px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 10px 0;
+    }
+
+    .brand {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      object-fit: contain;
+    }
+
+    .brand-copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text {
+      width: min(500px, 43vw);
+      max-height: 42px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .brand-tagline-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: -2px;
+    }
+
+    .brand-slogan {
+      width: min(355px, 31vw);
+      max-height: 27px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .brand-leaf {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      transform: rotate(68deg);
+    }
+
+    .back-button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(243,161,78,.72);
+      border-radius: 999px;
+      color: #fffaf3;
+      background: rgba(7, 36, 24, .5);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(-1px);
+      background: rgba(239,111,23,.18);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      padding: 50px 22px 46px;
+      text-align: center;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(5,37,24,.95), rgba(9,53,35,.76), rgba(9,53,35,.56)),
+        url('images/hero-vegas-landscaping.png') center 63% / cover no-repeat;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      height: 1px;
+      background: rgba(243,161,78,.65);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(860px, 100%);
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--orange-soft);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .17em;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(44px, 6vw, 78px);
+      line-height: .96;
+      letter-spacing: -.045em;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 18px auto 0;
+      color: rgba(255,255,255,.86);
+      font-size: clamp(14px, 1.25vw, 18px);
+      line-height: 1.6;
+    }
+
+    .gallery-shell {
+      width: min(100% - 44px, 1480px);
+      margin: 0 auto;
+      padding: 38px 0 64px;
+    }
+
+    .gallery-toolbar {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .gallery-heading span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--leaf);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(31px, 3vw, 46px);
+      line-height: 1;
+      letter-spacing: -.035em;
+    }
+
+    .gallery-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 14px;
+      background: #dfe5df;
+      cursor: zoom-in;
+      box-shadow: 0 8px 24px rgba(9, 45, 31, .10);
+      isolation: isolate;
+    }
+
+    .gallery-item::after {
+      content: 'VIEW';
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.30);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(8,40,28,.72);
+      backdrop-filter: blur(7px);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: .22s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.02);
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-message {
+      grid-column: 1 / -1;
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      border: 1px dashed rgba(18,59,42,.22);
+      border-radius: 16px;
+      color: var(--muted);
+      background: #fff;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .pagination {
+      min-height: 52px;
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .page-btn,
+    .page-number {
+      height: 42px;
+      min-width: 42px;
+      padding: 0 13px;
+      border: 1px solid rgba(18,59,42,.14);
+      border-radius: 999px;
+      color: var(--forest);
+      background: #fff;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(18,59,42,.06);
+      transition: .18s ease;
+    }
+
+    .page-btn:hover:not(:disabled),
+    .page-number:hover:not(.active) {
+      transform: translateY(-1px);
+      border-color: rgba(239,111,23,.45);
+    }
+
+    .page-number.active {
+      border-color: var(--orange);
+      color: #fff;
+      background: var(--orange);
+    }
+
+    .page-btn:disabled {
+      opacity: .30;
+      cursor: default;
+    }
+
+    .page-ellipsis {
+      min-width: 28px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .cta-strip {
+      width: min(100% - 44px, 1480px);
+      margin: 0 auto 62px;
+      padding: 24px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+      border: 1px solid rgba(243,161,78,.48);
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(115deg, #0a321f, #123b2a);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-strip h3 {
+      margin: 0 0 5px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(25px, 2.4vw, 38px);
+      line-height: 1;
+    }
+
+    .cta-strip p {
+      margin: 0;
+      color: rgba(255,255,255,.74);
+      font-size: 13px;
+    }
+
+    .cta-button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 78px;
+      background: rgba(2, 15, 10, .95);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-figure {
+      position: relative;
+      margin: 0;
+      max-width: min(1280px, 88vw);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.42);
+    }
+
+    .lightbox-counter {
+      color: rgba(255,255,255,.76);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .06em;
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+      position: absolute;
+      z-index: 3;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255,255,255,.10);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: .18s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+      background: rgba(239,111,23,.88);
+      border-color: rgba(239,111,23,.88);
+    }
+
+    .lightbox-close {
+      top: 18px;
+      right: 18px;
+      font-size: 28px;
+    }
+
+    .lightbox-nav {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 28px;
+    }
+
+    .lightbox-prev { left: 18px; }
+    .lightbox-next { right: 18px; }
+
+    .footer {
+      padding: 24px;
+      color: rgba(255,255,255,.72);
+      background: var(--forest-deep);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 1100px) {
+      .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        width: min(100% - 24px, 1480px);
+        min-height: 78px;
+        gap: 10px;
+      }
+
+      .brand { gap: 8px; }
+      .brand-logo { width: 50px; height: 50px; flex-basis: 50px; }
+      .brand-text { width: min(235px, 50vw); }
+      .brand-slogan { width: min(175px, 39vw); }
+      .brand-leaf { width: 25px; height: 25px; }
+      .back-button { min-height: 38px; padding: 0 12px; font-size: 0; }
+      .back-button::after { content: '←'; font-size: 19px; }
+
+      .hero {
+        min-height: 220px;
+        padding: 40px 16px 36px;
+        background-position: center 58%;
+      }
+
+      .gallery-shell {
+        width: min(100% - 24px, 1480px);
+        padding: 28px 0 46px;
+      }
+
+      .gallery-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .gallery-item {
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+      }
+
+      .gallery-item::after { display: none; }
+
+      .pagination {
+        gap: 6px;
+        margin-top: 22px;
+      }
+
+      .page-btn,
+      .page-number {
+        height: 38px;
+        min-width: 38px;
+        padding: 0 10px;
+        font-size: 12px;
+      }
+
+      .cta-strip {
+        width: min(100% - 24px, 1480px);
+        margin-bottom: 38px;
+        padding: 20px;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .cta-button { width: 100%; }
+
+      .lightbox { padding: 72px 12px 66px; }
+      .lightbox-figure { max-width: 96vw; }
+      .lightbox img { max-height: 74vh; }
+      .lightbox-nav { width: 42px; height: 42px; top: auto; bottom: 14px; transform: none; }
+      .lightbox-prev { left: calc(50% - 52px); }
+      .lightbox-next { right: calc(50% - 52px); }
+      .lightbox-close { width: 42px; height: 42px; top: 12px; right: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html#home" aria-label="Desert Forest Landscape home">
+        <img class="brand-logo" src="images/logo.png" alt="Desert Forest Landscape logo">
+        <span class="brand-copy">
+          <img class="brand-text" src="images/text.png" alt="Desert Forest Landscape">
+          <span class="brand-tagline-row">
+            <img class="brand-slogan" src="images/slogan.png" alt="Turning over a new leaf">
+            <img class="brand-leaf" src="images/leaf.png" alt="" aria-hidden="true">
+          </span>
+        </span>
+      </a>
+
+      <a class="back-button" href="index.html#projects">← Back to Projects</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="kicker">OUR WORK</span>
+      <h1>Project Gallery</h1>
+      <p>Explore completed landscaping projects from Desert Forest Landscape across Las Vegas and surrounding areas.</p>
+    </div>
+  </section>
+
+  <main class="gallery-shell">
+    <div class="gallery-toolbar">
+      <div class="gallery-heading">
+        <span>DESERT FOREST LANDSCAPE</span>
+        <h2>Recent Projects</h2>
+      </div>
+      <div class="gallery-count" id="galleryCount">Loading projects…</div>
+    </div>
+
+    <div class="gallery" id="projectGallery" aria-live="polite">
+      <div class="gallery-message">Loading project photos…</div>
+    </div>
+
+    <nav class="pagination" id="pagination" aria-label="Project gallery pages"></nav>
+  </main>
+
+  <section class="cta-strip">
+    <div>
+      <h3>Ready to transform your yard?</h3>
+      <p>Tell us what you have in mind and we’ll help you figure out the next step.</p>
+    </div>
+    <a class="cta-button" href="index.html#contact">GET A FREE ESTIMATE</a>
+  </section>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project image preview">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close preview">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous project image">‹</button>
+
+    <figure class="lightbox-figure">
+      <img id="lightboxImage" src="" alt="Expanded Desert Forest Landscape project">
+      <figcaption class="lightbox-counter" id="lightboxCounter"></figcaption>
+    </figure>
+
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Next project image">›</button>
+  </div>
+
+  <footer class="footer">Desert Forest Landscape • Las Vegas &amp; Surrounding Areas</footer>
+
+  <script>
+    const gallery = document.getElementById('projectGallery');
+    const pagination = document.getElementById('pagination');
+    const galleryCount = document.getElementById('galleryCount');
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+
+    const apiUrl = 'https://api.github.com/repos/Merci-Chi/viewyoursite/contents/Sites/desert-forest-landscape/Projects?ref=main';
+
+    const ITEMS_PER_PAGE = 12;
+    const MAX_VISIBLE_PAGE_BUTTONS = 5;
+
+    let projects = [];
+    let currentPage = 1;
+    let currentLightboxIndex = 0;
+
+    function naturalSort(a, b) {
+      return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+    }
+
+    function renderGallery() {
+      const totalPages = Math.max(1, Math.ceil(projects.length / ITEMS_PER_PAGE));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageItems = projects.slice(start, start + ITEMS_PER_PAGE);
+
+      gallery.innerHTML = '';
+
+      pageItems.forEach((file, index) => {
+        const globalIndex = start + index;
+
+        const button = document.createElement('button');
+        button.className = 'gallery-item';
+        button.type = 'button';
+        button.setAttribute('aria-label', `Open project image ${globalIndex + 1}`);
+
+        const img = document.createElement('img');
+        img.src = file.download_url;
+        img.alt = `Desert Forest Landscape project ${globalIndex + 1}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        button.appendChild(img);
+        button.addEventListener('click', () => openLightbox(globalIndex));
+        gallery.appendChild(button);
+      });
+
+      galleryCount.textContent = `${projects.length} project photo${projects.length === 1 ? '' : 's'}`;
+      renderPagination(totalPages);
+    }
+
+    function getVisiblePages(totalPages) {
+      if (totalPages <= MAX_VISIBLE_PAGE_BUTTONS) {
+        return Array.from({ length: totalPages }, (_, i) => i + 1);
+      }
+
+      let start = Math.max(1, currentPage - 2);
+      let end = Math.min(totalPages, start + MAX_VISIBLE_PAGE_BUTTONS - 1);
+      start = Math.max(1, end - MAX_VISIBLE_PAGE_BUTTONS + 1);
+
+      return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    }
+
+    function renderPagination(totalPages) {
+      pagination.innerHTML = '';
+      if (totalPages <= 1) return;
+
+      const first = makeButton('«', 'First page', currentPage === 1, () => goToPage(1));
+      const prev = makeButton('‹', 'Previous page', currentPage === 1, () => goToPage(currentPage - 1));
+
+      pagination.append(first, prev);
+
+      const visiblePages = getVisiblePages(totalPages);
+
+      if (visiblePages[0] > 1) {
+        pagination.appendChild(makePageButton(1));
+        if (visiblePages[0] > 2) pagination.appendChild(makeEllipsis());
+      }
+
+      visiblePages.forEach(page => {
+        if (page !== 1 && page !== totalPages) pagination.appendChild(makePageButton(page));
+      });
+
+      if (visiblePages[visiblePages.length - 1] < totalPages) {
+        if (visiblePages[visiblePages.length - 1] < totalPages - 1) pagination.appendChild(makeEllipsis());
+        pagination.appendChild(makePageButton(totalPages));
+      }
+
+      const next = makeButton('›', 'Next page', currentPage === totalPages, () => goToPage(currentPage + 1));
+      const last = makeButton('»', 'Last page', currentPage === totalPages, () => goToPage(totalPages));
+
+      pagination.append(next, last);
+    }
+
+    function makeButton(label, ariaLabel, disabled, onClick) {
+      const button = document.createElement('button');
+      button.className = 'page-btn';
+      button.type = 'button';
+      button.textContent = label;
+      button.setAttribute('aria-label', ariaLabel);
+      button.disabled = disabled;
+      button.addEventListener('click', onClick);
+      return button;
+    }
+
+    function makePageButton(page) {
+      const button = document.createElement('button');
+      button.className = 'page-number' + (page === currentPage ? ' active' : '');
+      button.type = 'button';
+      button.textContent = page;
+      button.setAttribute('aria-label', `Page ${page}`);
+      if (page === currentPage) button.setAttribute('aria-current', 'page');
+      button.addEventListener('click', () => goToPage(page));
+      return button;
+    }
+
+    function makeEllipsis() {
+      const span = document.createElement('span');
+      span.className = 'page-ellipsis';
+      span.textContent = '…';
+      span.setAttribute('aria-hidden', 'true');
+      return span;
+    }
+
+    function goToPage(page) {
+      const totalPages = Math.max(1, Math.ceil(projects.length / ITEMS_PER_PAGE));
+      currentPage = Math.min(Math.max(page, 1), totalPages);
+      renderGallery();
+      window.scrollTo({ top: document.querySelector('.gallery-shell').offsetTop - 110, behavior: 'smooth' });
+    }
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      if (!projects.length) return;
+      const file = projects[currentLightboxIndex];
+      lightboxImage.src = file.download_url;
+      lightboxImage.alt = `Desert Forest Landscape project ${currentLightboxIndex + 1}`;
+      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${projects.length}`;
+    }
+
+    function moveLightbox(direction) {
+      if (!projects.length) return;
+      currentLightboxIndex = (currentLightboxIndex + direction + projects.length) % projects.length;
+      updateLightbox();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      lightboxImage.src = '';
+    }
+
+    fetch(apiUrl, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(response => {
+        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+        return response.json();
+      })
+      .then(files => {
+        projects = files
+          .filter(file => file.type === 'file' && /\.(png|jpe?g|webp)$/i.test(file.name) && file.download_url)
+          .sort(naturalSort);
+
+        if (!projects.length) {
+          gallery.innerHTML = '<div class="gallery-message">No project photos have been added yet.</div>';
+          galleryCount.textContent = '0 project photos';
+          return;
+        }
+
+        renderGallery();
+      })
+      .catch(error => {
+        console.error('Could not load project images:', error);
+        gallery.innerHTML = '<div class="gallery-message">Project photos are temporarily unavailable. Please try again shortly.</div>';
+        galleryCount.textContent = 'Projects unavailable';
+        pagination.innerHTML = '';
+      });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => moveLightbox(-1));
+    lightboxNext.addEventListener('click', () => moveLightbox(1));
+
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!lightbox.classList.contains('open')) return;
+
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') moveLightbox(-1);
+      if (event.key === 'ArrowRight') moveLightbox(1);
+    });
+  </script>
+</body>
+</html>
