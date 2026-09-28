@@ -231,15 +231,25 @@
     <style id="review-card-layout">
       /* Review area: 3 cards per page on desktop, 2 on tablet, 1 on mobile. */
       #testimonials .review-carousel-shell {
+        display: block !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
         width: 100% !important;
         max-width: 1180px !important;
+        min-width: 0 !important;
         margin: 0 auto !important;
+        padding: 0 !important;
       }
 
       #testimonials .review-carousel-viewport {
+        display: block !important;
+        position: static !important;
+        grid-column: auto !important;
         width: 100% !important;
         max-width: 100% !important;
+        min-width: 0 !important;
         overflow: hidden !important;
+        margin: 0 !important;
       }
 
       #testimonials #reviewCarousel,
