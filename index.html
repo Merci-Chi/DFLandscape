@@ -363,12 +363,18 @@
         }
       }
 
-      .nextdoor-review-icon {
-        background: #8ed500 !important;
-        color: #123b2a !important;
-        font-family: Arial, sans-serif;
-        font-size: 1.35rem;
-        font-weight: 900;
+      .nextdoor-review-logo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+        display: block;
+      }
+
+      #testimonials .review-platform.review-platform-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
       }
     </style>
   </head>
@@ -989,10 +995,15 @@
                 <article class="review-card">
                   <div class="review-card-top">
                     <div
-                      class="review-platform review-platform-logo nextdoor-review-icon"
+                      class="review-platform review-platform-logo"
                       aria-label="Nextdoor App recommendation"
                     >
-                      <span aria-hidden="true">N</span>
+                      <img
+                        src="icons/nextdoor.png"
+                        alt=""
+                        aria-hidden="true"
+                        class="nextdoor-review-logo"
+                      />
                     </div>
                   </div>
 
