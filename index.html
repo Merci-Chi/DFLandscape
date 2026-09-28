@@ -1,2804 +1,1606 @@
 <!doctype html>
 
-
-
 <html lang="en">
-
   <head>
-
     <meta charset="UTF-8" />
 
-
-
     <meta
-
       name="viewport"
-
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-
     />
-
-
 
     <meta
-
       name="description"
-
       content="Desert Forest Landscape offers complete landscaping solutions in Las Vegas, from lawn care and tree services to pavers, irrigation, and lighting."
-
     />
-
-
 
     <meta name="theme-color" content="#123b2a" />
 
-
-
     <title>Desert Forest Landscape</title>
-
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-
-
     <link
-
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"
-
       rel="stylesheet"
-
     />
 
-
-
     <link
-
       rel="stylesheet"
-
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-
     />
-
-
 
     <link
-
       rel="stylesheet"
-
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-
       referrerpolicy="no-referrer"
-
     />
-
-
 
     <link rel="stylesheet" href="css.css" />
 
-
-
     <script>
-
       // Force a true refresh to start at the top of the page.
 
-
-
       if ("scrollRestoration" in history) {
-
         history.scrollRestoration = "manual";
-
       }
-
-
 
       const navEntry = performance.getEntriesByType("navigation")[0];
 
-
-
       const isReload = navEntry && navEntry.type === "reload";
 
-
-
       if (isReload && window.location.hash) {
-
         history.replaceState(
-
           null,
-
-
 
           "",
 
-
-
           window.location.pathname + window.location.search,
-
         );
-
       }
-
-
 
       if (isReload) {
-
         window.scrollTo(0, 0);
 
-
-
         window.addEventListener("pageshow", () => {
-
           window.scrollTo(0, 0);
 
-
-
           requestAnimationFrame(() => {
-
             window.scrollTo(0, 0);
 
-
-
             requestAnimationFrame(() => {
-
               window.scrollTo(0, 0);
-
             });
-
           });
-
         });
-
       }
-
     </script>
 
-
-
     <style>
-
       /* Partner / supplier rotating strip */
 
-
-
       .company-rotator {
-
         overflow: hidden;
 
-
-
         overflow-anchor: none;
-
-
 
         background: #fff;
 
-
-
         border-top: 1px solid rgba(18, 59, 42, 0.12);
-
-
 
         border-bottom: 1px solid rgba(18, 59, 42, 0.12);
 
-
-
         padding: 18px 0;
-
       }
 
-
-
       .company-rotator-track {
-
         display: flex;
-
-
 
         overflow-anchor: none;
 
-
-
         width: max-content;
 
-
-
         align-items: center;
-
-
 
         animation: companyTicker 18s linear infinite;
 
-
-
         will-change: transform;
-
       }
 
-
-
       .company-rotator-group {
-
         display: flex;
 
-
-
         align-items: center;
-
-
 
         flex: 0 0 auto;
 
-
-
         padding-right: 56px;
-
       }
 
-
-
       .company-rotator-item {
-
         display: inline-flex;
 
-
-
         align-items: center;
-
-
 
         gap: 14px;
 
-
-
         white-space: nowrap;
-
-
 
         color: #123b2a;
 
-
-
         font-family: "Inter", sans-serif;
-
-
 
         font-size: clamp(1rem, 1.7vw, 1.22rem);
 
-
-
         font-weight: 800;
-
-
 
         letter-spacing: 0.035em;
 
-
-
         text-transform: uppercase;
 
-
-
         text-decoration: none;
-
-
 
         margin-right: 56px;
 
-
-
         flex: 0 0 auto;
-
       }
-
-
 
       .company-rotator-group .company-rotator-item:last-child {
-
         margin-right: 0;
-
       }
-
-
 
       .company-rotator-name {
-
         text-decoration: underline;
 
-
-
         text-underline-offset: 3px;
-
       }
 
-
-
       .company-rotator-item::after {
-
         content: "•";
-
-
 
         color: #d8752c;
 
-
-
         font-size: 1.1em;
-
-
 
         margin-left: 42px;
 
-
-
         text-decoration: none;
 
-
-
         display: inline-block;
-
       }
-
-
 
       .company-rotator:hover .company-rotator-track {
-
         animation-play-state: paused;
-
       }
-
-
 
       @keyframes companyTicker {
-
         from {
-
           transform: translateX(0);
-
         }
-
-
 
         to {
-
           transform: translateX(-50%);
-
         }
-
       }
-
-
 
       @media (prefers-reduced-motion: reduce) {
-
         .company-rotator-track {
-
           animation: none;
-
         }
-
       }
-
-
 
       @media (max-width: 640px) {
-
         .company-rotator {
-
           padding: 14px 0;
-
         }
-
-
 
         .company-rotator-track {
-
           animation-duration: 14s;
-
         }
-
-
 
         .company-rotator-item {
-
           margin-right: 36px;
-
         }
-
-
 
         .company-rotator-group {
-
           padding-right: 36px;
-
         }
-
-
 
         .company-rotator-item::after {
-
           margin-left: 22px;
-
         }
-
       }
-
     </style>
-
-
 
     <style>
-
       /* Project preview: 5 images on desktop, 6 on phones. */
 
-
-
       .projects-preview-grid .mobile-extra-project {
-
         display: none;
-
       }
-
-
 
       @media (max-width: 767px) {
-
         .projects-preview-grid .mobile-extra-project {
-
           display: block;
-
         }
-
       }
-
     </style>
 
-  
-  <style id="single-review-fix">
-    /* One real review only: make it a normal full-width card instead of a carousel column */
-    #testimonials .review-carousel-shell {
-      width: 100% !important;
-      max-width: 900px !important;
-      margin: 0 auto !important;
-      display: block !important;
-    }
-
-    #testimonials .review-carousel-viewport {
-      width: 100% !important;
-      max-width: 100% !important;
-      overflow: visible !important;
-    }
-
-    #testimonials #reviewCarousel,
-    #testimonials .review-cards-grid {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      transform: none !important;
-      grid-template-columns: 1fr !important;
-    }
-
-    #testimonials .review-card {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      flex: none !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-    }
-
-    #testimonials .review-copy {
-      width: auto !important;
-      max-width: none !important;
-      white-space: normal !important;
-      overflow: visible !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-    }
-
-    @media (max-width: 767px) {
+    <style id="review-card-layout">
+      /* Review area: 3 cards per page on desktop, 2 on tablet, 1 on mobile. */
       #testimonials .review-carousel-shell {
+        width: 100% !important;
+        max-width: 1180px !important;
+        margin: 0 auto !important;
+      }
+
+      #testimonials .review-carousel-viewport {
+        width: 100% !important;
         max-width: 100% !important;
+        overflow: hidden !important;
+      }
+
+      #testimonials #reviewCarousel,
+      #testimonials .review-cards-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 22px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        transform: none !important;
+        align-items: stretch !important;
       }
 
       #testimonials .review-card {
-        padding-left: 18px !important;
-        padding-right: 18px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        min-height: 360px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 28px !important;
+        border: 1px solid rgba(18, 59, 42, 0.18) !important;
+        border-radius: 22px !important;
+        background: #fff !important;
+        box-shadow: 0 12px 30px rgba(18, 59, 42, 0.08) !important;
       }
-    }
-  </style>
 
-</head>
+      #testimonials .review-copy {
+        width: auto !important;
+        max-width: none !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+        line-height: 1.65 !important;
+        flex: 1 1 auto !important;
+      }
 
+      #testimonials .review-card-bottom {
+        margin-top: auto !important;
+      }
 
+      #testimonials .review-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      #testimonials .review-nav-button {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border: 1px solid rgba(18, 59, 42, 0.3);
+        border-radius: 50%;
+        background: #123b2a;
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+        font-size: 1.35rem;
+        line-height: 1;
+        transition:
+          transform 0.18s ease,
+          opacity 0.18s ease;
+      }
+
+      #testimonials .review-nav-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+      }
+
+      #testimonials .review-nav-button:disabled {
+        cursor: default;
+        opacity: 0.32;
+      }
+
+      #testimonials .review-page-status {
+        min-width: 74px;
+        text-align: center;
+        color: #123b2a;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 800;
+      }
+
+      @media (max-width: 900px) {
+        #testimonials #reviewCarousel,
+        #testimonials .review-cards-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+      }
+
+      @media (max-width: 640px) {
+        #testimonials #reviewCarousel,
+        #testimonials .review-cards-grid {
+          grid-template-columns: 1fr !important;
+          gap: 16px !important;
+        }
+
+        #testimonials .review-card {
+          min-height: 0 !important;
+          padding: 20px !important;
+        }
+
+        #testimonials .review-navigation {
+          margin-top: 18px;
+        }
+      }
+    </style>
+  </head>
 
   <body class="brand-refresh">
-
     <header class="site-header">
-
       <div class="header-inner shell-wide">
-
         <a class="brand" href="#home" aria-label="Desert Forest Landscape home">
-
           <img
-
             class="brand-logo"
-
             src="images/logo.png"
-
             alt="Desert Forest Landscape logo"
-
           />
 
-
-
           <span class="brand-copy">
-
             <img
-
               class="brand-text"
-
               src="images/text.png"
-
               alt="Desert Forest Landscape"
-
             />
 
-
-
             <span class="brand-tagline-row">
-
               <img
-
                 class="brand-slogan"
-
                 src="images/slogan.png"
-
                 alt="Turning over a new leaf"
-
               />
-
-
 
               <img
-
                 class="brand-leaf"
-
                 src="images/leaf.png"
-
                 alt=""
-
                 aria-hidden="true"
-
               />
-
             </span>
-
           </span>
-
         </a>
 
-
-
         <button
-
           class="mobile-menu-button"
-
           id="mobileMenuButton"
-
           aria-label="Open menu"
-
           aria-expanded="false"
-
         >
-
           <span></span><span></span><span></span>
-
         </button>
 
-
-
         <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-
           <a href="#home" class="nav-link active">Home</a>
-
-
 
           <a href="#about" class="nav-link">About</a>
 
-
-
           <a href="#services" class="nav-link">Services</a>
-
-
 
           <a href="#projects" class="nav-link">Projects</a>
 
-
-
           <a href="#testimonials" class="nav-link">Testimonials</a>
 
-
-
           <a href="#contact" class="nav-link">Contact Us</a>
-
         </nav>
-
       </div>
-
     </header>
 
-
-
     <div class="sub-header">
-
       <div class="sub-header-inner shell-wide">
-
         <a class="phone-link" href="tel:+17028752612">
-
           <span>Call Us</span>
 
-
-
           <strong>(702) 875-2616</strong>
-
         </a>
 
-
-
         <form class="site-search" role="search">
-
           <input
-
             type="search"
-
             placeholder="Search..."
-
             aria-label="Search services"
-
           />
 
-
-
           <button type="submit" aria-label="Search">
-
             <img
-
               src="icons/search.png"
-
               alt=""
-
               aria-hidden="true"
-
               style="width: 20px; height: 20px; object-fit: contain"
-
             />
-
           </button>
-
         </form>
-
       </div>
-
     </div>
 
-
-
     <main id="home">
-
       <section class="compact-hero" id="home">
-
         <div class="compact-hero-image" aria-hidden="true"></div>
-
-
 
         <div class="compact-hero-overlay"></div>
 
-
-
         <div class="compact-hero-content">
-
           <div class="compact-hero-copy">
-
             <span class="compact-hero-kicker">PROUDLY SERVING</span>
-
-
 
             <h1>Las Vegas Landscaping & Surrounding Areas</h1>
 
-
-
             <p>
-
               Maintenance, Clean-Ups, Irrigation Repairs, Artificial Turf,
-
               Pavers, Trees, Enhancements & more.
-
             </p>
 
-
-
             <div class="compact-hero-actions">
-
               <a class="hero-cta hero-cta-primary" href="#contact"
-
                 >GET A FREE ESTIMATE</a
-
               >
-
-
 
               <a class="hero-cta hero-cta-secondary" href="tel:+17028752612"
-
                 >(702) 875-2616</a
-
               >
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
-
 
       <section class="stats-section" aria-label="Company highlights">
-
         <div class="stats-grid">
-
           <article class="stat-card">
-
             <div class="stat-icon">
-
               <img
-
                 src="icons/award.png"
-
                 alt=""
-
                 aria-hidden="true"
-
                 style="width: 100%; height: 100%; object-fit: contain"
-
               />
-
             </div>
 
-
-
             <div class="stat-label">
-
               <strong>40+</strong><span>Years of Experience</span>
-
             </div>
-
           </article>
 
-
-
           <article class="stat-card">
-
             <div class="stat-icon">
-
               <img
-
                 src="icons/tree.png"
-
                 alt=""
-
                 aria-hidden="true"
-
                 style="width: 100%; height: 100%; object-fit: contain"
-
               />
-
             </div>
 
-
-
             <div class="stat-label">
-
               <strong>1000+</strong><span>Trees Installed</span>
-
             </div>
-
           </article>
 
-
-
           <article class="stat-card">
-
             <div class="stat-icon">
-
               <img
-
                 src="icons/estimate.png"
-
                 alt=""
-
                 aria-hidden="true"
-
                 style="width: 100%; height: 100%; object-fit: contain"
-
               />
-
             </div>
-
-
 
             <div class="stat-label">
-
               <strong>FREE</strong><span>Estimates</span>
-
             </div>
-
           </article>
 
-
-
           <article class="stat-card">
-
             <div class="stat-icon">
-
               <img
-
                 src="icons/reliable.png"
-
                 alt=""
-
                 aria-hidden="true"
-
                 style="width: 100%; height: 100%; object-fit: contain"
-
               />
-
             </div>
-
-
 
             <div class="stat-label"><span>Honest & Reliable Service</span></div>
-
           </article>
-
         </div>
-
       </section>
 
-
-
       <section class="about-section" id="about">
-
         <div class="site-width about-grid">
-
           <div class="about-photo">
-
             <img
-
               src="images/about-vegas-landscaping.png"
-
               alt="Professionally landscaped residential backyard"
-
             />
-
           </div>
 
-
-
           <div class="about-copy">
-
             <span class="eyebrow">ABOUT DESERT FOREST LANDSCAPE</span>
-
-
 
             <h2>Your Vision. Our Expertise.<br />A Landscape You’ll Love.</h2>
 
-
-
             <p>
-
               For over 40 years, Desert Forest Landscape has been transforming
-
               outdoor spaces across Las Vegas with professional landscaping
-
               services, quality materials, and exceptional care.
-
             </p>
-
-
 
             <p>
-
               Whether you need routine maintenance or a complete yard
-
               transformation, we’re here to bring your outdoor vision to life.
-
             </p>
-
-
 
             <a href="#contact" class="small-button"
-
               >LEARN MORE ABOUT US
 
               <img src="images/leaf.png" alt="" aria-hidden="true"
-
             /></a>
-
           </div>
-
-
 
           <div class="about-logo-wrap">
-
             <img src="images/logo.png" alt="Desert Forest Landscape logo" />
-
           </div>
-
         </div>
-
       </section>
-
-
 
       <section class="company-rotator" aria-label="Companies we work with">
-
         <div class="company-rotator-track">
-
           <div class="company-rotator-group">
-
             <a
-
               class="company-rotator-item"
-
               href="https://a-l-handyman.com"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">A&L Handyman</span></a
-
             >
 
-
-
             <a
-
               class="company-rotator-item"
-
               href="https://www.starnursery.com/"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Star Nursery</span></a
-
             >
 
-
-
             <a
-
               class="company-rotator-item"
-
               href="https://www.moonvalleynurseries.com/"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Moon Valley Nursery</span></a
-
             >
 
             <a
-
               class="company-rotator-item"
-
               href="http://www.wheresthepoop.info"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Where's The Poop</span></a
-
             >
-
           </div>
-
-
 
           <div class="company-rotator-group" aria-hidden="true">
-
             <a
-
               class="company-rotator-item"
-
               href="https://a-l-handyman.com"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">A&L Handyman</span></a
-
             >
 
-
-
             <a
-
               class="company-rotator-item"
-
               href="https://www.starnursery.com/"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Star Nursery</span></a
-
             >
 
-
-
             <a
-
               class="company-rotator-item"
-
               href="https://www.moonvalleynurseries.com/"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Moon Valley Nursery</span></a
-
             >
 
             <a
-
               class="company-rotator-item"
-
               href="http://www.wheresthepoop.info"
-
               target="_blank"
-
               rel="noopener noreferrer"
-
               ><span class="company-rotator-name">Where's The Poop</span></a
-
             >
-
           </div>
-
         </div>
-
       </section>
 
-
-
       <section class="consultation-strip">
-
         <div class="consultation-strip-bg" aria-hidden="true"></div>
-
-
 
         <div class="consultation-strip-overlay"></div>
 
-
-
         <div class="consultation-strip-content">
-
           <div class="consultation-strip-copy">
-
             <span class="consultation-kicker">NOT SURE WHERE TO START?</span>
-
-
 
             <h2>Tell us what you want your yard to become.</h2>
 
-
-
             <p>
-
               We’ll help you figure out the right services, what makes sense for
-
               your property, and where to start.
-
             </p>
-
           </div>
-
-
 
           <div class="consultation-strip-actions">
-
             <a href="#contact" class="consultation-button primary"
-
               >FREE CONSULTATION</a
-
             >
-
-
 
             <a href="tel:+17028752612" class="consultation-button secondary"
-
               >CALL (702) 875-2616</a
-
             >
-
           </div>
-
         </div>
-
       </section>
 
-
-
       <section class="services-section" id="services">
-
         <div class="site-width">
-
           <div class="section-head">
-
             <span class="eyebrow centered-eyebrow">OUR SERVICES</span>
 
-
-
             <h2>Complete Landscaping Solutions</h2>
-
           </div>
 
-
-
           <div class="services-grid services-card-grid">
-
             <article class="service-card service-card-blue searchable-card">
-
               <img
-
                 src="images/service-lawn-yard-care.png"
-
                 alt="Professional lawn and garden maintenance"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>Lawn &<br />Yard Care</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Mowing & Edging</li>
-
-
 
                   <li>Weed Control</li>
 
-
-
                   <li>Overseeding</li>
 
-
-
                   <li>Yard Cleanups</li>
-
                 </ul>
-
               </div>
-
             </article>
 
-
-
             <article class="service-card service-card-cream searchable-card">
-
               <img
-
                 src="images/service-tree-services.png"
-
                 alt="Professional tree care service"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>Tree<br />Services</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Tree Trimming</li>
-
-
 
                   <li>Tree Removal</li>
 
-
-
                   <li>Tree Planting</li>
 
-
-
                   <li>Stump Grinding</li>
-
                 </ul>
-
               </div>
-
             </article>
 
-
-
             <article class="service-card service-card-olive searchable-card">
-
               <img
-
                 src="images/service-new-landscaping.png"
-
                 alt="New residential landscape installation"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>New<br />Landscaping</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Artificial Turf</li>
-
-
 
                   <li>Sod Installation</li>
 
-
-
                   <li>Plants, Trees & Shrubs</li>
 
-
-
                   <li>Landscape Design</li>
-
                 </ul>
-
               </div>
-
             </article>
 
-
-
             <article class="service-card service-card-rust searchable-card">
-
               <img
-
                 src="images/service-patios-walkways.png"
-
                 alt="Landscaped patio and stone walkway"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>Patios &<br />Walkways</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Pavers</li>
-
-
 
                   <li>Walkways</li>
 
-
-
                   <li>Patios</li>
 
-
-
                   <li>Steps</li>
-
                 </ul>
-
               </div>
-
             </article>
 
-
-
             <article class="service-card service-card-tan searchable-card">
-
               <img
-
                 src="images/service-yard-construction.png"
-
                 alt="Garden construction and hardscaping"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>Yard<br />Construction</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Retaining Walls</li>
-
-
 
                   <li>Concrete</li>
 
-
-
                   <li>Rock & Gravel</li>
 
-
-
                   <li>Drainage Solutions</li>
-
                 </ul>
-
               </div>
-
             </article>
 
-
-
             <article class="service-card service-card-blue searchable-card">
-
               <img
-
                 src="images/service-irrigation-lighting.png"
-
                 alt="Automatic lawn irrigation sprinkler"
-
               />
 
-
-
               <div class="service-card-body">
-
                 <h3>Irrigation &<br />Lighting</h3>
-
-
 
                 <span class="service-accent"></span>
 
-
-
                 <ul>
-
                   <li>Irrigation Systems</li>
-
-
 
                   <li>Drain Lines</li>
 
-
-
                   <li>12-Volt Lighting</li>
 
-
-
                   <li>Lighting Design</li>
-
                 </ul>
-
               </div>
-
             </article>
-
           </div>
-
         </div>
-
       </section>
 
-
-
       <div class="site-width process-heading process-heading-outside">
-
         <span class="eyebrow">OUR PROCESS</span>
 
-
-
         <h2>Simple. Clear. Stress-Free.</h2>
-
       </div>
 
-
-
       <section class="process-section" id="process">
-
         <div class="site-width process-layout">
-
           <div class="process-copy">
-
             <div class="process-steps">
-
               <article class="step-item">
-
                 <span class="step-badge">1</span>
 
-
-
                 <div class="step-icon">
-
                   <img
-
                     src="icons/consultation.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 100%; height: 100%; object-fit: contain"
-
                   />
-
                 </div>
-
-
 
                 <h3>Free Consultation</h3>
 
-
-
                 <p>
-
                   We meet with you, listen to your ideas, and assess your
-
                   property.
-
                 </p>
-
               </article>
-
-
 
               <div class="process-arrow">→</div>
 
-
-
               <article class="step-item">
-
                 <span class="step-badge">2</span>
 
-
-
                 <div class="step-icon">
-
                   <img
-
                     src="icons/custom-plan.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 100%; height: 100%; object-fit: contain"
-
                   />
-
                 </div>
-
-
 
                 <h3>Custom Plan</h3>
 
-
-
                 <p>
-
                   We create a detailed plan and provide a clear, upfront
-
                   estimate.
-
                 </p>
-
               </article>
-
-
 
               <div class="process-arrow">→</div>
 
-
-
               <article class="step-item">
-
                 <span class="step-badge">3</span>
 
-
-
                 <div class="step-icon">
-
                   <img
-
                     src="icons/build-install.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 100%; height: 100%; object-fit: contain"
-
                   />
-
                 </div>
-
-
 
                 <h3>Build & Install</h3>
 
-
-
                 <p>
-
                   Our experienced team gets to work with care and precision.
-
                 </p>
-
               </article>
-
-
 
               <div class="process-arrow">→</div>
 
-
-
               <article class="step-item">
-
                 <span class="step-badge">4</span>
 
-
-
                 <div class="step-icon">
-
                   <img
-
                     src="icons/landscape.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 100%; height: 100%; object-fit: contain"
-
                   />
-
                 </div>
-
-
 
                 <h3>Enjoy Your Landscape</h3>
 
-
-
                 <p>Relax and enjoy a beautiful outdoor space built to last.</p>
-
               </article>
-
             </div>
-
           </div>
-
-
 
           <div class="process-photo">
-
             <img
-
               src="images/process-vegas-landscaping.png"
-
               alt="Completed residential landscape project"
-
             />
-
           </div>
-
         </div>
-
       </section>
 
-
-
       <section class="projects-section" id="projects">
-
         <div class="site-width">
-
           <div class="projects-heading-row">
-
             <div>
-
               <span class="section-kicker">OUR WORK</span>
 
-
-
               <h2 class="projects-heading">Recent Projects</h2>
-
             </div>
-
           </div>
 
-
-
           <div
-
             class="projects-grid projects-preview-grid"
-
             id="projectsPreview"
-
             aria-live="polite"
-
           ></div>
 
-
-
           <div class="project-button-row">
-
             <a href="gallery.html" class="small-button center-button"
-
               >VIEW MORE PROJECTS
 
               <img src="images/leaf.png" alt="" aria-hidden="true"
-
             /></a>
-
           </div>
-
         </div>
-
       </section>
 
-
-
       <section class="testimonials-section" id="testimonials">
-
         <div class="site-width">
-
           <div class="testimonial-heading redesigned-heading">
-
             <h2>What Our Clients Say</h2>
 
-
-
             <div class="heading-divider" aria-hidden="true">
-
               <span></span>
-
-
 
               <img src="images/leaf.png" alt="" />
 
-
-
               <span></span>
-
             </div>
-
           </div>
 
-
-
           <div class="review-carousel-shell">
-
             <div class="review-carousel-viewport">
-
               <div class="review-cards-grid" id="reviewCarousel">
-
                 <article class="review-card">
-
                   <div class="review-card-top">
-
                     <div
-
                       class="review-platform review-platform-logo"
-
                       aria-label="Facebook recommendation"
-
                     >
-
                       <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-
                     </div>
-
                   </div>
 
-
-
                   <p class="review-copy">
-
                     I need to give kudos and promote an excellent company!
-
                     Desert Forest Landscape - Don White (702) 875-2616 is the
-
                     best landscape company I have ever used! I was so lucky to
-
                     find him! Don White is a wonderful person as well as the
-
                     most knowledgeable landscaper. If you want your property to
-
                     look like a golf course, he's your man! I recommend him with
-
                     the highest regard!
-
                   </p>
 
-
-
                   <div class="review-card-bottom">
-
                     <div class="review-author">
-
                       <div class="review-avatar">P</div>
 
                       <div class="review-author-meta">
-
                         <strong>Philip Pinkus</strong>
 
                         <span>Facebook recommendation</span>
-
                       </div>
-
                     </div>
-
                   </div>
-
                 </article>
-
               </div>
-
             </div>
 
+            <div class="review-navigation" aria-label="Review navigation">
+              <button
+                class="review-nav-button"
+                id="previousReview"
+                type="button"
+                aria-label="Previous reviews"
+              >
+                &#8592;
+              </button>
+
+              <span class="review-page-status" id="reviewPageStatus"
+                >1 / 1</span
+              >
+
+              <button
+                class="review-nav-button"
+                id="nextReview"
+                type="button"
+                aria-label="Next reviews"
+              >
+                &#8594;
+              </button>
+            </div>
           </div>
 
-
-
           <section class="contact-bottom-section" id="contact">
-
             <div class="contact-bottom-copy">
-
               <span class="section-kicker light-kicker">GET IN TOUCH</span>
-
-
 
               <h2>Contact Us</h2>
 
-
-
               <p>
-
                 Have a question or ready to get started? We’d love to hear from
-
                 you.
-
               </p>
-
             </div>
 
-
-
             <form class="contact-bottom-form" enctype="multipart/form-data">
-
               <div class="contact-grid">
-
                 <input type="text" placeholder="Name" aria-label="Name" />
 
-
-
                 <input type="text" placeholder="Phone" aria-label="Phone" />
-
               </div>
-
-
 
               <input type="email" placeholder="Email" aria-label="Email" />
 
-
-
               <div class="contact-message-row">
-
                 <textarea placeholder="Message" aria-label="Message"></textarea>
 
-
-
                 <button type="submit" class="contact-submit">
-
                   SEND MESSAGE
-
                 </button>
-
               </div>
-
-
 
               <div class="contact-attachment-row">
-
                 <label class="attachment-button" for="contactFiles">
-
                   <img
-
                     src="icons/attachment.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 18px; height: 18px; object-fit: contain"
-
                   />
 
-
-
                   <span>Attach Photos / Videos</span>
-
                 </label>
 
-
-
                 <input
-
                   id="contactFiles"
-
                   class="attachment-input"
-
                   type="file"
-
                   name="attachments"
-
                   accept="image/*,video/*"
-
                   multiple
-
                 />
-
               </div>
-
-
 
               <div
-
                 class="attachment-preview"
-
                 id="attachmentPreview"
-
                 aria-live="polite"
-
               ></div>
-
             </form>
-
           </section>
 
-
-
           <footer
-
             class="mobile-footer-reference"
-
             aria-label="Desert Forest Landscape footer"
-
           >
-
             <div class="mobile-footer-hero">
-
               <div class="mobile-footer-brand">
-
                 <img
-
                   class="mobile-footer-logo"
-
                   src="images/logo.png"
-
                   alt="Desert Forest Landscape logo"
-
                 />
 
-
-
                 <img
-
                   class="mobile-footer-title-image"
-
                   src="images/text.png"
-
                   alt="Desert Forest Landscape"
-
                 />
-
-
 
                 <img
-
                   class="mobile-footer-slogan-image"
-
                   src="images/slogan.png"
-
                   alt="Turning Over a New Leaf"
-
                 />
-
               </div>
-
-
 
               <p class="mobile-footer-about">
-
                 Proudly serving the Las Vegas Valley with quality landscaping,
-
                 tree care, and outdoor solutions built to last.
-
               </p>
-
-
 
               <div class="mobile-footer-socials" aria-label="Social media">
-
                 <a href="#" aria-label="Instagram"
-
                   ><i class="fa-brands fa-instagram"></i
-
                 ></a>
-
-
 
                 <a href="#" aria-label="Facebook"
-
                   ><i class="fa-brands fa-facebook-f"></i
-
                 ></a>
-
-
 
                 <a href="#" aria-label="Google"
-
                   ><img
-
                     class="google-logo-multicolor"
-
                     src="icons/google.svg"
-
                     alt=""
-
                     aria-hidden="true"
-
                 /></a>
 
-
-
                 <a href="#" aria-label="Yelp"
-
                   ><i class="fa-brands fa-yelp"></i
-
                 ></a>
-
               </div>
-
             </div>
-
-
 
             <div class="mobile-footer-section mobile-footer-areas">
-
               <h3>
-
                 <img
-
                   src="icons/location.png"
-
                   alt=""
-
                   aria-hidden="true"
-
                   style="width: 18px; height: 18px; object-fit: contain"
-
                 /><span>SERVICE AREAS</span>
-
               </h3>
-
-
 
               <p>
-
                 Las Vegas, Henderson, North Las Vegas, Summerlin, Spring Valley,
-
                 Green Valley, Boulder City & surrounding areas.
-
               </p>
-
             </div>
 
-
-
             <div class="mobile-footer-section mobile-footer-services-section">
-
               <h3>
-
                 <i class="bi bi-flower1" aria-hidden="true"></i
-
                 ><span>SERVICES</span>
-
               </h3>
 
-
-
               <div class="mobile-footer-service-grid">
-
                 <div>
-
                   <i class="bi bi-flower2"></i
-
                   ><span>Lawn Care & Maintenance</span>
-
                 </div>
-
-
 
                 <div><i class="bi bi-tree"></i><span>Tree Services</span></div>
 
-
-
                 <div>
-
                   <i class="bi bi-grid-3x3-gap-fill"></i
-
                   ><span>Pavers & Hardscape</span>
-
                 </div>
 
-
-
                 <div>
-
                   <i class="bi bi-droplet-fill"></i><span>Irrigation</span>
-
                 </div>
 
-
-
                 <div>
-
                   <i class="bi bi-lightbulb-fill"></i
-
                   ><span>Landscape Lighting</span>
-
                 </div>
 
-
-
                 <div>
-
                   <i class="bi bi-flower1"></i><span>Artificial Turf</span>
-
                 </div>
-
-
 
                 <div>
-
                   <i class="bi bi-trash3-fill"></i><span>Yard Clean Ups</span>
-
                 </div>
-
-
 
                 <div><i class="bi bi-three-dots"></i><span>And More</span></div>
-
               </div>
-
             </div>
-
-
 
             <div class="mobile-footer-contact-hours">
-
               <div class="mobile-footer-contact-block">
-
                 <h3>CONTACT</h3>
 
-
-
                 <a href="tel:+17028752612"
-
                   ><img
-
                     src="icons/phone.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 18px; height: 18px; object-fit: contain"
-
                   /><span>(702) 875-2616</span></a
-
                 >
-
-
 
                 <p>
-
                   <img
-
                     src="icons/location.png"
-
                     alt=""
-
                     aria-hidden="true"
-
                     style="width: 18px; height: 18px; object-fit: contain"
-
                   /><span>Las Vegas Valley, Nevada</span>
-
                 </p>
-
               </div>
-
-
 
               <div class="mobile-footer-hours-block">
-
                 <h3>BUSINESS HOURS</h3>
 
-
-
                 <div>
-
                   <span>Mon–Fri</span><strong>7:00 AM – 6:00 PM</strong>
-
                 </div>
-
-
 
                 <div>
-
                   <span>Saturday</span><strong>8:00 AM – 2:00 PM</strong>
-
                 </div>
-
-
 
                 <div><span>Sunday</span><strong>Closed</strong></div>
-
               </div>
-
             </div>
-
-
 
             <a class="mobile-footer-estimate" href="#contact"
-
               ><img
-
                 src="icons/estimate.png"
-
                 alt=""
-
                 aria-hidden="true"
-
                 style="width: 18px; height: 18px; object-fit: contain"
-
               /><span>GET A FREE ESTIMATE</span></a
-
             >
 
-
-
             <div class="mobile-footer-bottom">
-
               <p>© 2026 Desert Forest Landscape. All Rights Reserved.</p>
 
-
-
               <div>
-
                 <a href="#">Privacy Policy</a><span>•</span
-
                 ><a href="#">Terms of Service</a>
-
               </div>
-
             </div>
-
           </footer>
 
-
-
           <footer class="site-footer site-footer-expanded">
-
             <div class="footer-main">
-
               <div class="footer-brand-column">
-
                 <div class="footer-brand-lockup">
-
                   <img
-
                     class="footer-logo"
-
                     src="images/logo.png"
-
                     alt="Desert Forest Landscape logo"
-
                   />
 
-
-
                   <div class="footer-brand-images">
-
                     <img
-
                       class="footer-title-image"
-
                       src="images/text.png"
-
                       alt="Desert Forest Landscape"
-
                     />
-
-
 
                     <img
-
                       class="footer-slogan-image"
-
                       src="images/slogan.png"
-
                       alt="Turning Over a New Leaf"
-
                     />
-
                   </div>
-
                 </div>
-
-
 
                 <p class="footer-about">
-
                   Proudly serving the Las Vegas Valley with quality landscaping,
-
                   tree care, and outdoor solutions built to last.
-
                 </p>
 
-
-
                 <div
-
                   class="footer-socials footer-brand-socials"
-
                   aria-label="Social media"
-
                 >
-
                   <a href="#" aria-label="Instagram"
-
                     ><i class="fa-brands fa-instagram"></i
-
                   ></a>
-
-
 
                   <a href="#" aria-label="Facebook"
-
                     ><i class="fa-brands fa-facebook-f"></i
-
                   ></a>
-
-
 
                   <a href="#" aria-label="Google"
-
                     ><img
-
                       class="google-logo-multicolor"
-
                       src="icons/google.svg"
-
                       alt=""
-
                       aria-hidden="true"
-
                   /></a>
 
-
-
                   <a href="#" aria-label="Yelp"
-
                     ><i class="fa-brands fa-yelp"></i
-
                   ></a>
-
                 </div>
-
-
 
                 <div class="footer-service-areas">
-
                   <h3>SERVICE AREAS</h3>
 
-
-
                   <p class="footer-service-area-copy">
-
                     Las Vegas, Henderson, North Las Vegas, Summerlin, Spring
-
                     Valley, Green Valley, Boulder City & surrounding areas.
-
                   </p>
-
                 </div>
-
               </div>
 
-
-
               <div class="footer-column footer-services">
-
                 <h3>SERVICES</h3>
 
-
-
                 <ul class="footer-list footer-services-list">
-
                   <li>Lawn Care & Maintenance</li>
-
-
 
                   <li>Tree Services</li>
 
-
-
                   <li>Pavers & Hardscape</li>
-
-
 
                   <li>Irrigation & Sprinklers</li>
 
-
-
                   <li>Landscape Lighting</li>
-
-
 
                   <li>Artificial Turf</li>
 
-
-
                   <li>Yard Clean Ups</li>
 
-
-
                   <li>And More</li>
-
                 </ul>
-
               </div>
-
-
 
               <div class="footer-right-panel">
-
                 <div class="footer-right-top">
-
                   <div class="footer-column footer-contact-area">
-
                     <h3>CONTACT</h3>
 
-
-
                     <a class="footer-contact-link" href="tel:+17028752612"
-
                       ><img
-
                         src="icons/phone.png"
-
                         alt=""
-
                         aria-hidden="true"
-
                         style="width: 18px; height: 18px; object-fit: contain"
-
                       /><span>(702) 875-2616</span></a
-
                     >
-
-
 
                     <div class="footer-location">
-
                       <img
-
                         src="icons/location.png"
-
                         alt=""
-
                         aria-hidden="true"
-
                         style="width: 18px; height: 18px; object-fit: contain"
-
                       /><span>Las Vegas Valley, Nevada</span>
-
                     </div>
-
                   </div>
-
-
 
                   <div class="footer-column footer-hours">
-
                     <h3>BUSINESS HOURS</h3>
 
-
-
                     <div class="hours-row">
-
                       <span>Mon–Fri</span><strong>7:00 AM – 6:00 PM</strong>
-
                     </div>
 
-
-
                     <div class="hours-row">
-
                       <span>Saturday</span><strong>8:00 AM – 2:00 PM</strong>
-
                     </div>
-
-
 
                     <div class="hours-row">
-
                       <span>Sunday</span><strong>Closed</strong>
-
                     </div>
-
-
 
                     <a class="footer-estimate-button" href="#contact"
-
                       >GET A FREE ESTIMATE</a
-
                     >
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
-
 
             <div class="footer-bottom">
-
               <p>© 2026 Desert Forest Landscape. All Rights Reserved.</p>
 
-
-
               <div class="footer-links">
-
                 <a href="#">Privacy Policy</a><a href="#">Terms of Service</a>
-
               </div>
-
             </div>
-
           </footer>
-
         </div>
-
       </section>
-
     </main>
 
-
-
     <script>
-
       // Keep the site at its intended scale across touchpads, phones, and tablets.
 
-
-
       document.addEventListener(
-
         "gesturestart",
 
         (event) => event.preventDefault(),
 
         { passive: false },
-
       );
 
-
-
       document.addEventListener(
-
         "gesturechange",
 
         (event) => event.preventDefault(),
 
         { passive: false },
-
       );
 
-
-
       document.addEventListener(
-
         "gestureend",
 
         (event) => event.preventDefault(),
 
         { passive: false },
-
       );
 
-
-
       document.addEventListener(
-
         "wheel",
 
         (event) => {
-
           if (event.ctrlKey || event.metaKey) event.preventDefault();
-
         },
 
         { passive: false },
-
       );
 
-
-
       document.addEventListener("keydown", (event) => {
-
         const zoomKey = ["+", "-", "=", "_", "0"].includes(event.key);
 
-
-
         if ((event.ctrlKey || event.metaKey) && zoomKey) event.preventDefault();
-
       });
-
-
 
       let lastTouchEnd = 0;
 
-
-
       document.addEventListener(
-
         "touchend",
 
         (event) => {
-
           const now = Date.now();
-
-
 
           if (now - lastTouchEnd <= 300) event.preventDefault();
 
-
-
           lastTouchEnd = now;
-
         },
 
         { passive: false },
-
       );
-
     </script>
 
-
-
     <script>
-
       // Dynamically load ANY PNG files currently inside the GitHub Projects folder.
-
-
 
       // No filenames are hard-coded, so adding/removing PNGs in Projects updates this preview automatically.
 
-
-
       (() => {
-
         const preview = document.getElementById("projectsPreview");
-
-
 
         if (!preview) return;
 
-
-
         const apiUrl =
-
           "https://api.github.com/repos/Merci-Chi/viewyoursite/contents/Sites/desert-forest-landscape/Projects?ref=main";
 
-
-
         function shuffle(items) {
-
           const copy = [...items];
 
-
-
           for (let i = copy.length - 1; i > 0; i--) {
-
             const j = Math.floor(Math.random() * (i + 1));
 
-
-
             [copy[i], copy[j]] = [copy[j], copy[i]];
-
           }
 
-
-
           return copy;
-
         }
 
-
-
         function renderProjects(files) {
-
           const pngs = shuffle(
-
             files.filter(
-
               (file) =>
-
                 file.type === "file" &&
-
-                /**\.**png$/i.test(file.name) &&
-
+                /\.png$/i.test(file.name) &&
                 file.download_url,
-
             ),
-
           );
 
-
-
           const amount = window.matchMedia("(max-width: 767px)").matches
-
             ? 6
-
             : 5;
-
-
 
           preview.innerHTML = "";
 
-
-
           pngs.slice(0, amount).forEach((file, index) => {
-
             const img = document.createElement("img");
-
-
 
             img.src = file.download_url;
 
-
-
             img.alt = `Desert Forest Landscape project ${index + 1}`;
-
-
 
             img.loading = "lazy";
 
-
-
             img.decoding = "async";
 
-
-
             preview.appendChild(img);
-
           });
-
         }
 
-
-
         fetch(apiUrl, { headers: { Accept: "application/vnd.github+json" } })
-
           .then((response) => {
-
             if (!response.ok)
-
               throw new Error(`GitHub returned ${response.status}`);
 
-
-
             return response.json();
-
           })
-
-
 
           .then(renderProjects)
 
-
-
           .catch((error) => {
-
             console.error("Could not load project images:", error);
 
-
-
             preview.innerHTML =
-
               '<p style="grid-column:1/-1;text-align:center;">Project photos are temporarily unavailable.</p>';
-
           });
-
       })();
-
     </script>
 
+    <script>
+      (() => {
+        const carousel = document.getElementById("reviewCarousel");
+        const previousButton = document.getElementById("previousReview");
+        const nextButton = document.getElementById("nextReview");
+        const pageStatus = document.getElementById("reviewPageStatus");
 
+        if (!carousel || !previousButton || !nextButton || !pageStatus) return;
+
+        let currentPage = 0;
+
+        function cardsPerPage() {
+          if (window.innerWidth <= 640) return 1;
+          if (window.innerWidth <= 900) return 2;
+          return 3;
+        }
+
+        function renderReviewPage() {
+          const cards = [...carousel.querySelectorAll(".review-card")];
+          const perPage = cardsPerPage();
+          const totalPages = Math.max(1, Math.ceil(cards.length / perPage));
+
+          if (currentPage >= totalPages) currentPage = totalPages - 1;
+          if (currentPage < 0) currentPage = 0;
+
+          const start = currentPage * perPage;
+          const end = start + perPage;
+
+          cards.forEach((card, index) => {
+            card.hidden = index < start || index >= end;
+          });
+
+          pageStatus.textContent = `${currentPage + 1} / ${totalPages}`;
+          previousButton.disabled = currentPage === 0;
+          nextButton.disabled = currentPage >= totalPages - 1;
+        }
+
+        previousButton.addEventListener("click", () => {
+          if (currentPage === 0) return;
+          currentPage -= 1;
+          renderReviewPage();
+        });
+
+        nextButton.addEventListener("click", () => {
+          const cards = [...carousel.querySelectorAll(".review-card")];
+          const totalPages = Math.max(
+            1,
+            Math.ceil(cards.length / cardsPerPage()),
+          );
+          if (currentPage >= totalPages - 1) return;
+          currentPage += 1;
+          renderReviewPage();
+        });
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            currentPage = 0;
+            renderReviewPage();
+          }, 120);
+        });
+
+        renderReviewPage();
+      })();
+    </script>
 
     <script src="js.js"></script>
-
   </body>
-
 </html>
-
-
