@@ -3038,16 +3038,18 @@
 
             const img = document.createElement("img");
             img.src = photoUrl(photo.storage_path);
-            img.alt = `Desert Forest Landscape ${photo.label || "project"} photo ${index + 1}`;
+            img.alt = `Desert Forest Landscape ${["before","after"].includes(String(photo.label || "").toLowerCase()) ? photo.label : "project"} photo ${index + 1}`;
             img.loading = "lazy";
             img.decoding = "async";
 
             card.appendChild(img);
 
-            if (photo.label === "before" || photo.label === "after") {
+            const normalizedLabel = String(photo.label || "").trim().toLowerCase();
+
+            if (normalizedLabel === "before" || normalizedLabel === "after") {
               const badge = document.createElement("span");
               badge.className = "project-photo-label";
-              badge.textContent = photo.label.toUpperCase();
+              badge.textContent = normalizedLabel.toUpperCase();
               card.appendChild(badge);
             }
             preview.appendChild(card);
