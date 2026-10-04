@@ -809,6 +809,47 @@
     }
   </style>
 
+
+    <style id="supabase-project-photo-style">
+      .projects-preview-grid .project-preview-photo {
+        position: relative;
+        overflow: hidden;
+        min-width: 0;
+        height: 100%;
+      }
+
+      .projects-preview-grid .project-preview-photo > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .projects-preview-grid .project-photo-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 2;
+        padding: 6px 9px;
+        border-radius: 999px;
+        color: #fff;
+        background: rgba(8, 40, 28, .84);
+        border: 1px solid rgba(255,255,255,.25);
+        font: 900 10px/1 "Inter", sans-serif;
+        letter-spacing: .08em;
+        backdrop-filter: blur(6px);
+      }
+
+      @media (max-width: 767px) {
+        .projects-preview-grid .project-photo-label {
+          top: 7px;
+          left: 7px;
+          padding: 5px 7px;
+          font-size: 8px;
+        }
+      }
+    </style>
+
 </head>
 
 
@@ -2968,151 +3009,86 @@
 
 
     <script>
-
-      // Dynamically load ANY PNG files currently inside the GitHub Projects folder.
-
-
-
-      // No filenames are hard-coded, so adding/removing PNGs in Projects updates this preview automatically.
-
-
-
+      // Load project photos from the Desert Forest Landscape Supabase photo manager.
       (() => {
-
         const preview = document.getElementById("projectsPreview");
-
-
-
         if (!preview) return;
 
+        const SUPABASE_URL = "https://wfxuxrvygyzonkflpwoq.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_e2h4t8AvCobzftt36UrDbw_NJGq8qlJ";
+        const TABLE = "dfl_project_photos";
+        const BUCKET = "dfl-projects";
 
+        let projectPhotos = [];
 
-        const apiUrl =
-
-          "https://api.github.com/repos/Merci-Chi/viewyoursite/contents/Sites/desert-forest-landscape/Projects?ref=main";
-
-
-
-        function shuffle(items) {
-
-          const copy = [...items];
-
-
-
-          for (let i = copy.length - 1; i > 0; i--) {
-
-            const j = Math.floor(Math.random() * (i + 1));
-
-
-
-            [copy[i], copy[j]] = [copy[j], copy[i]];
-
-          }
-
-
-
-          return copy;
-
+        function photoUrl(path) {
+          return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${path
+            .split("/")
+            .map(encodeURIComponent)
+            .join("/")}`;
         }
 
-
-
-        function renderProjects(files) {
-
-          const pngs = shuffle(
-
-            files.filter(
-
-              (file) =>
-
-                file.type === "file" &&
-
-                /\.png$/i.test(file.name) &&
-
-                file.download_url,
-
-            ),
-
-          );
-
-
-
-          const amount = window.matchMedia("(max-width: 767px)").matches
-
-            ? 6
-
-            : 5;
-
-
-
+        function renderProjects() {
+          const amount = window.matchMedia("(max-width: 767px)").matches ? 6 : 5;
           preview.innerHTML = "";
 
-
-
-          pngs.slice(0, amount).forEach((file, index) => {
+          projectPhotos.slice(0, amount).forEach((photo, index) => {
+            const card = document.createElement("div");
+            card.className = "project-preview-photo";
 
             const img = document.createElement("img");
-
-
-
-            img.src = file.download_url;
-
-
-
-            img.alt = `Desert Forest Landscape project ${index + 1}`;
-
-
-
+            img.src = photoUrl(photo.storage_path);
+            img.alt = `Desert Forest Landscape ${photo.label || "project"} photo ${index + 1}`;
             img.loading = "lazy";
-
-
-
             img.decoding = "async";
 
+            const badge = document.createElement("span");
+            badge.className = "project-photo-label";
+            badge.textContent = (photo.label || "after").toUpperCase();
 
-
-            preview.appendChild(img);
-
+            card.append(img, badge);
+            preview.appendChild(card);
           });
 
+          if (!projectPhotos.length) {
+            preview.innerHTML =
+              '<p style="grid-column:1/-1;text-align:center;">Project photos are coming soon.</p>';
+          }
         }
 
-
-
-        fetch(apiUrl, { headers: { Accept: "application/vnd.github+json" } })
-
+        fetch(
+          `${SUPABASE_URL}/rest/v1/${TABLE}?select=id,storage_path,label,sort_order&order=sort_order.asc`,
+          {
+            headers: {
+              apikey: SUPABASE_KEY,
+              Authorization: `Bearer ${SUPABASE_KEY}`,
+              Accept: "application/json"
+            }
+          }
+        )
           .then((response) => {
-
-            if (!response.ok)
-
-              throw new Error(`GitHub returned ${response.status}`);
-
-
-
+            if (!response.ok) throw new Error(`Supabase returned ${response.status}`);
             return response.json();
-
           })
-
-
-
-          .then(renderProjects)
-
-
-
+          .then((rows) => {
+            projectPhotos = Array.isArray(rows) ? rows : [];
+            renderProjects();
+          })
           .catch((error) => {
-
             console.error("Could not load project images:", error);
-
-
-
             preview.innerHTML =
-
               '<p style="grid-column:1/-1;text-align:center;">Project photos are temporarily unavailable.</p>';
-
           });
 
+        let lastMobile = window.matchMedia("(max-width: 767px)").matches;
+        window.addEventListener("resize", () => {
+          const mobile = window.matchMedia("(max-width: 767px)").matches;
+          if (mobile !== lastMobile) {
+            lastMobile = mobile;
+            renderProjects();
+          }
+        });
       })();
-
     </script>
 
 
