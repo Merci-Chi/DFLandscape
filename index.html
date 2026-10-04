@@ -3042,11 +3042,14 @@
             img.loading = "lazy";
             img.decoding = "async";
 
-            const badge = document.createElement("span");
-            badge.className = "project-photo-label";
-            badge.textContent = (photo.label || "after").toUpperCase();
+            card.appendChild(img);
 
-            card.append(img, badge);
+            if (photo.label === "before" || photo.label === "after") {
+              const badge = document.createElement("span");
+              badge.className = "project-photo-label";
+              badge.textContent = photo.label.toUpperCase();
+              card.appendChild(badge);
+            }
             preview.appendChild(card);
           });
 
