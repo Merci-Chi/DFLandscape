@@ -271,6 +271,24 @@
       transition: transform .35s ease, filter .35s ease;
     }
 
+    .gallery-item-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(8,40,28,.82);
+      backdrop-filter: blur(7px);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
     .gallery-item:hover img {
       transform: scale(1.035);
       filter: saturate(1.04) contrast(1.02);
@@ -638,7 +656,10 @@
     const lightboxPrev = document.getElementById('lightboxPrev');
     const lightboxNext = document.getElementById('lightboxNext');
 
-    const apiUrl = 'https://api.github.com/repos/Merci-Chi/viewyoursite/contents/Sites/desert-forest-landscape/Projects?ref=main';
+    const SUPABASE_URL = 'https://wfxuxrvygyzonkflpwoq.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_e2h4t8AvCobzftt36UrDbw_NJGq8qlJ';
+    const TABLE = 'dfl_project_photos';
+    const BUCKET = 'dfl-projects';
 
     const ITEMS_PER_PAGE = 12;
     const MAX_VISIBLE_PAGE_BUTTONS = 5;
@@ -647,8 +668,11 @@
     let currentPage = 1;
     let currentLightboxIndex = 0;
 
-    function naturalSort(a, b) {
-      return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+    function photoUrl(path) {
+      return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${path
+        .split('/')
+        .map(encodeURIComponent)
+        .join('/')}`;
     }
 
     function renderGallery() {
@@ -660,24 +684,33 @@
 
       gallery.innerHTML = '';
 
-      pageItems.forEach((file, index) => {
+      pageItems.forEach((photo, index) => {
         const globalIndex = start + index;
+        const labelText = (photo.label || 'after').toUpperCase();
 
         const button = document.createElement('button');
         button.className = 'gallery-item';
         button.type = 'button';
-        button.setAttribute('aria-label', `Open project image ${globalIndex + 1}`);
+        button.setAttribute('aria-label', `Open ${photo.label || 'project'} image ${globalIndex + 1}`);
 
         const img = document.createElement('img');
-        img.src = file.download_url;
-        img.alt = `Desert Forest Landscape project ${globalIndex + 1}`;
+        img.src = photoUrl(photo.storage_path);
+        img.alt = `Desert Forest Landscape ${photo.label || 'project'} photo ${globalIndex + 1}`;
         img.loading = 'lazy';
         img.decoding = 'async';
 
-        button.appendChild(img);
+        const label = document.createElement('span');
+        label.className = 'gallery-item-label';
+        label.textContent = labelText;
+
+        button.append(img, label);
         button.addEventListener('click', () => openLightbox(globalIndex));
         gallery.appendChild(button);
       });
+
+      if (!projects.length) {
+        gallery.innerHTML = '<div class="gallery-message">No project photos have been added yet.</div>';
+      }
 
       galleryCount.textContent = `${projects.length} project photo${projects.length === 1 ? '' : 's'}`;
       renderPagination(totalPages);
@@ -701,7 +734,6 @@
 
       const first = makeButton('«', 'First page', currentPage === 1, () => goToPage(1));
       const prev = makeButton('‹', 'Previous page', currentPage === 1, () => goToPage(currentPage - 1));
-
       pagination.append(first, prev);
 
       const visiblePages = getVisiblePages(totalPages);
@@ -722,7 +754,6 @@
 
       const next = makeButton('›', 'Next page', currentPage === totalPages, () => goToPage(currentPage + 1));
       const last = makeButton('»', 'Last page', currentPage === totalPages, () => goToPage(totalPages));
-
       pagination.append(next, last);
     }
 
@@ -772,10 +803,11 @@
 
     function updateLightbox() {
       if (!projects.length) return;
-      const file = projects[currentLightboxIndex];
-      lightboxImage.src = file.download_url;
-      lightboxImage.alt = `Desert Forest Landscape project ${currentLightboxIndex + 1}`;
-      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${projects.length}`;
+      const photo = projects[currentLightboxIndex];
+      lightboxImage.src = photoUrl(photo.storage_path);
+      lightboxImage.alt = `Desert Forest Landscape ${photo.label || 'project'} photo ${currentLightboxIndex + 1}`;
+      lightboxCounter.textContent =
+        `${(photo.label || 'after').toUpperCase()} • ${currentLightboxIndex + 1} / ${projects.length}`;
     }
 
     function moveLightbox(direction) {
@@ -790,22 +822,22 @@
       lightboxImage.src = '';
     }
 
-    fetch(apiUrl, { headers: { Accept: 'application/vnd.github+json' } })
+    fetch(
+      `${SUPABASE_URL}/rest/v1/${TABLE}?select=id,storage_path,label,sort_order&order=sort_order.asc`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          Accept: 'application/json'
+        }
+      }
+    )
       .then(response => {
-        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+        if (!response.ok) throw new Error(`Supabase returned ${response.status}`);
         return response.json();
       })
-      .then(files => {
-        projects = files
-          .filter(file => file.type === 'file' && /\.(png|jpe?g|webp)$/i.test(file.name) && file.download_url)
-          .sort(naturalSort);
-
-        if (!projects.length) {
-          gallery.innerHTML = '<div class="gallery-message">No project photos have been added yet.</div>';
-          galleryCount.textContent = '0 project photos';
-          return;
-        }
-
+      .then(rows => {
+        projects = Array.isArray(rows) ? rows : [];
         renderGallery();
       })
       .catch(error => {
@@ -825,7 +857,6 @@
 
     document.addEventListener('keydown', event => {
       if (!lightbox.classList.contains('open')) return;
-
       if (event.key === 'Escape') closeLightbox();
       if (event.key === 'ArrowLeft') moveLightbox(-1);
       if (event.key === 'ArrowRight') moveLightbox(1);
