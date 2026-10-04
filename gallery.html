@@ -686,7 +686,10 @@
 
       pageItems.forEach((photo, index) => {
         const globalIndex = start + index;
-        const labelText = (photo.label || 'after').toUpperCase();
+        const labelText =
+          photo.label === 'before' || photo.label === 'after'
+            ? photo.label.toUpperCase()
+            : '';
 
         const button = document.createElement('button');
         button.className = 'gallery-item';
@@ -699,11 +702,14 @@
         img.loading = 'lazy';
         img.decoding = 'async';
 
-        const label = document.createElement('span');
-        label.className = 'gallery-item-label';
-        label.textContent = labelText;
+        button.appendChild(img);
 
-        button.append(img, label);
+        if (labelText) {
+          const label = document.createElement('span');
+          label.className = 'gallery-item-label';
+          label.textContent = labelText;
+          button.appendChild(label);
+        }
         button.addEventListener('click', () => openLightbox(globalIndex));
         gallery.appendChild(button);
       });
@@ -806,8 +812,12 @@
       const photo = projects[currentLightboxIndex];
       lightboxImage.src = photoUrl(photo.storage_path);
       lightboxImage.alt = `Desert Forest Landscape ${photo.label || 'project'} photo ${currentLightboxIndex + 1}`;
+      const lightboxLabel =
+        photo.label === 'before' || photo.label === 'after'
+          ? `${photo.label.toUpperCase()} • `
+          : '';
       lightboxCounter.textContent =
-        `${(photo.label || 'after').toUpperCase()} • ${currentLightboxIndex + 1} / ${projects.length}`;
+        `${lightboxLabel}${currentLightboxIndex + 1} / ${projects.length}`;
     }
 
     function moveLightbox(direction) {
