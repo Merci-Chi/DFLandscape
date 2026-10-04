@@ -686,19 +686,20 @@
 
       pageItems.forEach((photo, index) => {
         const globalIndex = start + index;
+        const normalizedLabel = String(photo.label || '').trim().toLowerCase();
         const labelText =
-          photo.label === 'before' || photo.label === 'after'
-            ? photo.label.toUpperCase()
+          normalizedLabel === 'before' || normalizedLabel === 'after'
+            ? normalizedLabel.toUpperCase()
             : '';
 
         const button = document.createElement('button');
         button.className = 'gallery-item';
         button.type = 'button';
-        button.setAttribute('aria-label', `Open ${photo.label || 'project'} image ${globalIndex + 1}`);
+        button.setAttribute('aria-label', `Open ${labelText ? normalizedLabel : 'project'} image ${globalIndex + 1}`);
 
         const img = document.createElement('img');
         img.src = photoUrl(photo.storage_path);
-        img.alt = `Desert Forest Landscape ${photo.label || 'project'} photo ${globalIndex + 1}`;
+        img.alt = `Desert Forest Landscape ${labelText ? normalizedLabel : 'project'} photo ${globalIndex + 1}`;
         img.loading = 'lazy';
         img.decoding = 'async';
 
