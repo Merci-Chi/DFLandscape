@@ -402,3 +402,49 @@ const HEADER_TAB_POSITIONS = {
     if (event.key === 'Enter' || event.key === ' ') fallLeaf(event);
   });
 })();
+
+// ============================================================
+// DYNAMIC FIXED HEADER STACK
+// Measure the two fixed header rows instead of guessing their
+// height at breakpoints. This keeps the hero/content fully below
+// the headers at every browser width, including intermediate sizes.
+// ============================================================
+(() => {
+  const root = document.documentElement;
+  const siteHeader = document.querySelector('.site-header');
+  const subHeader = document.querySelector('.sub-header');
+
+  if (!siteHeader || !subHeader) return;
+
+  let rafId = 0;
+
+  const updateHeaderStack = () => {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      const siteHeight = Math.ceil(siteHeader.getBoundingClientRect().height);
+      const subHeight = Math.ceil(subHeader.getBoundingClientRect().height);
+      const stackHeight = siteHeight + subHeight;
+
+      root.style.setProperty('--site-header-height', `${siteHeight}px`);
+      root.style.setProperty('--sub-header-height', `${subHeight}px`);
+      root.style.setProperty('--header-stack-height', `${stackHeight}px`);
+    });
+  };
+
+  updateHeaderStack();
+
+  window.addEventListener('load', updateHeaderStack);
+  window.addEventListener('resize', updateHeaderStack, { passive: true });
+  window.addEventListener('orientationchange', updateHeaderStack, { passive: true });
+
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(updateHeaderStack);
+    observer.observe(siteHeader);
+    observer.observe(subHeader);
+  }
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(updateHeaderStack).catch(() => {});
+  }
+})();
+
