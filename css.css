@@ -7743,3 +7743,39 @@ html {
   scroll-margin-top: calc(var(--header-stack-height) + 12px) !important;
 }
 
+/* Narrow-screen header: remove fixed positioning entirely to prevent overlap. */
+@media (max-width: 1100px) {
+  /*
+   * At tablet / shrunken-desktop widths the second header can change height
+   * as its contents wrap. Keeping both bars fixed is what allowed the hero
+   * to slide underneath them. Put the bars back in normal document flow
+   * at these widths so overlap is structurally impossible.
+   */
+  .site-header,
+  .sub-header {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    inset: auto !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  html {
+    scroll-padding-top: 12px !important;
+  }
+
+  #home,
+  #about,
+  #services,
+  #process,
+  #projects,
+  #testimonials,
+  #contact {
+    scroll-margin-top: 12px !important;
+  }
+}
+
