@@ -7711,3 +7711,20 @@ body.brand-refresh .mobile-footer-socials a .google-logo-multicolor {
   margin-top: 5px;
 }
 
+/* Tablet header overlap fix: keep the fixed header stack from covering the hero. */
+@media (min-width: 761px) and (max-width: 860px) {
+  /*
+   * The 860px breakpoint stacks the phone/search bar vertically, while the
+   * 1100px breakpoint shortens the main offset to 146px. That combination
+   * made the fixed sub-header overlap the top of the hero and hide the
+   * "Proudly Serving" text. Reserve the full stacked-header height here.
+   */
+  main {
+    padding-top: 192px;
+  }
+
+  html {
+    scroll-padding-top: 200px;
+  }
+}
+
