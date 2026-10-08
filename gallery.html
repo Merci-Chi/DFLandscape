@@ -716,7 +716,7 @@
 
         const img = document.createElement('img');
         img.src = photoUrl(photo.storage_path);
-        img.alt = `Desert Forest Landscape ${labelText ? normalizedLabel : 'project'} photo ${globalIndex + 1}`;
+        img.alt = `${normalizedLabel === 'before' ? 'Before landscaping work' : normalizedLabel === 'after' ? 'After landscaping work' : 'Landscaping project'} — Desert Forest Landscape, Las Vegas area`;
         img.loading = 'lazy';
         img.decoding = 'async';
 
@@ -829,7 +829,7 @@
       if (!projects.length) return;
       const photo = projects[currentLightboxIndex];
       lightboxImage.src = photoUrl(photo.storage_path);
-      lightboxImage.alt = `Desert Forest Landscape ${photo.label || 'project'} photo ${currentLightboxIndex + 1}`;
+      lightboxImage.alt = `${String(photo.label || '').toLowerCase() === 'before' ? 'Before landscaping work' : String(photo.label || '').toLowerCase() === 'after' ? 'After landscaping work' : 'Landscaping project'} — Desert Forest Landscape, Las Vegas area`;
       const lightboxLabel =
         photo.label === 'before' || photo.label === 'after'
           ? `${photo.label.toUpperCase()} • `
