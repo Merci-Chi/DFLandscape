@@ -2337,27 +2337,27 @@
 
 
 
-            <form class="contact-bottom-form" enctype="multipart/form-data">
+            <form class="contact-bottom-form" id="landscapeContactForm" enctype="multipart/form-data">
 
               <div class="contact-grid">
 
-                <input type="text" placeholder="Name" aria-label="Name" />
+                <input type="text" placeholder="Name" aria-label="Name" name="name" autocomplete="name" maxlength="120" required />
 
 
 
-                <input type="text" placeholder="Phone" aria-label="Phone" />
+                <input type="text" placeholder="Phone" aria-label="Phone" name="phone" type="tel" autocomplete="tel" maxlength="24" required />
 
               </div>
 
 
 
-              <input type="email" placeholder="Email" aria-label="Email" />
+              <input type="email" placeholder="Email" aria-label="Email" name="email" autocomplete="email" maxlength="254" required />
 
 
 
               <div class="contact-message-row">
 
-                <textarea placeholder="Message" aria-label="Message"></textarea>
+                <textarea placeholder="Message" aria-label="Message" name="message" minlength="10" maxlength="4000" required></textarea>
 
 
 
@@ -3335,6 +3335,51 @@
 
 
 
+    <script id="dfl-contact-handler">
+(() => {
+  const form = document.getElementById("landscapeContactForm");
+  if (!form) return;
+  const status = document.getElementById("dflContactStatus");
+  const submit = form.querySelector('[type="submit"]');
+  const files = document.getElementById("contactFiles");
+  const endpoint = "https://wfxuxrvygyzonkflpwoq.supabase.co/functions/v1/dfl-contact";
+  const started = Date.now();
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || !email || !message || phone.replace(/\D/g, "").length < 10) {
+      status.textContent = "Please enter your name, a valid phone number, email, and message.";
+      return;
+    }
+    if (files?.files?.length) {
+      status.textContent = "Attachments are not supported by the contact form yet. Please remove them and describe the project in your message.";
+      return;
+    }
+    submit.disabled = true;
+    status.textContent = "Sending your message…";
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email, message, website: data.get("website") || "", elapsed_ms: Date.now() - started })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || "Unable to send.");
+      status.textContent = "Your message was received! We'll contact you soon.";
+      form.reset();
+      document.getElementById("attachmentPreview")?.replaceChildren();
+    } catch (error) {
+      status.textContent = "Your message could not be sent. Please call (702) 875-2616 or try again later.";
+      console.error("Contact request failed:", error);
+    } finally { submit.disabled = false; }
+  });
+})();
+</script>
     <script src="js.js"></script>
 
     <script src="analytics.js?v=20261008-1" defer></script>
