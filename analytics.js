@@ -50,7 +50,7 @@
     } catch { return null; }
   }
   function shortText(value, max) {
-    return String(value || "").replace(/\\s+/g, " ").trim().slice(0, max);
+    return String(value || "").replace(/\s+/g, " ").trim().slice(0, max);
   }
   function eventName(el) {
     const explicit = el.dataset.analytics;
@@ -58,13 +58,13 @@
     const href = el.getAttribute("href") || "";
     if (href.startsWith("tel:")) return "call_now";
     if (href.startsWith("mailto:")) return "email_click";
-    if (/gallery\\.html/i.test(href)) return "view_all_projects";
+    if (/gallery\.html/i.test(href)) return "view_all_projects";
     if (href.startsWith("#")) return "navigate_" + shortText(href.slice(1).replace(/[^a-z0-9_-]/gi, "_"), 60);
     if (el.matches('button[type="submit"], input[type="submit"]')) {
       return el.closest(".contact-bottom-form") ? "contact_submit_click" : "form_submit_click";
     }
     if (href.startsWith("https://") || href.startsWith("http://")) {
-      try { return "external_" + shortText(new URL(href).hostname.replace(/^www\\./, "").replace(/[^a-z0-9._-]/gi, "_"), 65); } catch {}
+      try { return "external_" + shortText(new URL(href).hostname.replace(/^www\./, "").replace(/[^a-z0-9._-]/gi, "_"), 65); } catch {}
     }
     const label = el.getAttribute("aria-label") || el.textContent || el.id || "button";
     return "click_" + shortText(label.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, ""), 70);
