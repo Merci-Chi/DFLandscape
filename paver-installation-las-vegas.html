@@ -26,6 +26,7 @@ body{margin:0;color:#123b2a;background:#fbf8f1;font-family:Inter,Arial,sans-seri
 .service-footer{background:#08281c;color:#fff;text-align:center;padding:28px 16px}
 .service-footer a{color:#fff}
 @media(max-width:700px){.service-page-main .hero{grid-template-columns:1fr}.service-page-main .services{grid-template-columns:1fr}.service-page-main{padding-top:35px}}
+.service-page-main{padding-top:42px!important}.service-sub-header .sub-header-inner{justify-content:space-between}.service-estimate-link{color:#fff;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,.45);padding:10px 16px;border-radius:8px}.service-footer-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}.service-footer-brand{display:flex;align-items:center;gap:8px}.service-footer-brand img:first-child{width:42px;height:42px;object-fit:contain}.service-footer-brand img:nth-child(2){width:180px;max-height:35px;object-fit:contain}.service-footer nav{display:flex;gap:17px;flex-wrap:wrap}@media(max-width:700px){.service-estimate-link{align-self:center}.service-footer-inner{justify-content:center;text-align:center}}
 </style></head><body>
 <header class="site-header">
 
@@ -140,11 +141,12 @@ body{margin:0;color:#123b2a;background:#fbf8f1;font-family:Inter,Arial,sans-seri
       </div>
 
     </header>
+<div class="sub-header service-sub-header"><div class="sub-header-inner shell-wide"><a class="phone-link" href="tel:+17028752612"><span>Call Us</span><strong>(702) 875-2616</strong></a><a class="service-estimate-link" href="/#contact">GET A FREE ESTIMATE</a></div></div>
 <main class="service-page-main"><section class="hero"><div><span class="eyebrow">Las Vegas Landscaping Services</span><h1>Paver Installation in Las Vegas</h1><p>Plan patios, walkways and outdoor spaces with paver and hardscaping services from Desert Forest Landscape.</p><a class="cta" href="/#contact">Request a Consultation</a></div><img src="/images/service-patios-walkways.png" alt="Paver Installation in Las Vegas landscape service" width="800" height="600" fetchpriority="high"></section>
 <section><h2>Services and Options</h2><ul class="services"><li>Paver patios</li><li>Walkways and outdoor steps</li><li>Landscape construction</li><li>Retaining walls, concrete, rock and gravel options</li></ul><p>Pavers can help define outdoor gathering areas, paths and transitions across your property. Contact us to discuss the size, layout and design of your landscaping project.</p></section>
 <section><h2>Serving Las Vegas and Surrounding Areas</h2><p>Desert Forest Landscape serves Las Vegas, Henderson, North Las Vegas, Summerlin, Spring Valley, Green Valley, Boulder City and surrounding communities.</p><a class="cta" href="tel:+17028752612">Call (702) 875-2616</a></section>
 <section><h2>Explore More Landscaping Services</h2><p><a href="/irrigation-repair-las-vegas.html">Irrigation Repair in Las Vegas</a> · <a href="/artificial-turf-las-vegas.html">Artificial Turf in Las Vegas</a> · <a href="/gallery.html">Project Gallery</a></p></section></main>
-<footer class="service-footer"><a href="/">Home</a> · <a href="/#services">All Services</a> · <a href="/#contact">Contact</a></footer><script>
+<footer class="service-footer"><div class="service-footer-inner"><a class="service-footer-brand" href="/"><img src="/images/logo.png" alt="Desert Forest Landscape logo"><img src="/images/text.png" alt="Desert Forest Landscape"></a><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/gallery.html">Projects</a><a href="/#contact">Contact</a></nav><a href="tel:+17028752612">(702) 875-2616</a></div></footer><script>
 document.getElementById('mobileMenuButton')?.addEventListener('click', function () {
   const nav = document.getElementById('mainNav');
   const open = this.getAttribute('aria-expanded') !== 'true';
@@ -152,4 +154,8 @@ document.getElementById('mobileMenuButton')?.addEventListener('click', function 
   nav?.classList.toggle('open', open);
   nav?.classList.toggle('is-open', open);
 });
+document.querySelectorAll('#mainNav a').forEach(link => link.addEventListener('click', () => {
+  document.getElementById('mainNav')?.classList.remove('open', 'is-open');
+  document.getElementById('mobileMenuButton')?.setAttribute('aria-expanded', 'false');
+}));
 </script></body></html>
