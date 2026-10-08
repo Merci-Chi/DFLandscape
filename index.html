@@ -3141,7 +3141,7 @@
 
             const img = document.createElement("img");
             img.src = photoUrl(photo.storage_path);
-            img.alt = `Desert Forest Landscape ${["before","after"].includes(String(photo.label || "").toLowerCase()) ? photo.label : "project"} photo ${index + 1}`;
+            img.alt = `${String(photo.label || "").toLowerCase() === "before" ? "Before landscaping work" : String(photo.label || "").toLowerCase() === "after" ? "After landscaping work" : "Landscaping project"} — Desert Forest Landscape, Las Vegas area`;
             img.loading = "lazy";
             img.decoding = "async";
 
