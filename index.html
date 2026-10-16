@@ -3470,17 +3470,13 @@
     if (phone.replace(/[^0-9]/g,'').length < 10) { status.textContent='Please enter a valid phone number.';return; }
     submit.disabled=true; status.textContent='Sending your review…';
     try {
-      const response=await fetch('https://wfxuxrvygyzonkflpwoq.supabase.co/functions/v1/dfl-contact',{
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-          name:String(data.get('name')).trim(),email:String(data.get('email')).trim(),phone,
-          message:'[Customer review — '+data.get('rating')+'/5 stars]\\n'+String(data.get('review')).trim(),
-          website:data.get('website')||'',elapsed_ms:Date.now()-openedAt
-        })
+      const response=await fetch('https://wfxuxrvygyzonkflpwoq.supabase.co/rest/v1/dfl_customer_reviews',{
+        method:'POST',headers:{'Content-Type':'application/json','apikey':'sb_publishable_e2h4t8AvCobzftt36UrDbw_NJGq8qlJ','Prefer':'return=minimal'},
+        body:JSON.stringify({name:String(data.get('name')).trim(),email:String(data.get('email')).trim(),phone,rating:Number(data.get('rating')),review:String(data.get('review')).trim()})
       });
-      const result=await response.json().catch(()=>({}));
-      if(!response.ok||!result.ok) throw new Error(result.error||'Submission failed');
+      if(!response.ok) throw new Error('Review submission failed: '+response.status);
       form.reset();form.querySelectorAll('.selected').forEach(el=>el.classList.remove('selected'));
-      status.textContent='Thank you! Your review has been sent to our team.';
+      status.textContent='Response recorded. Thank you for taking the time to share your experience with Desert Forest Landscape! We truly appreciate your feedback.';
     } catch(err) {
       status.textContent='We could not send your review. Please try again or call (702) 875-2616.';
       console.error('Review submission failed',err);
