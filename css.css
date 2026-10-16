@@ -7779,3 +7779,57 @@ html {
   }
 }
 
+
+/* Service-card curves are decoration; never clip the readable content.
+   Use a fixed-height curve so wrapping text cannot change its geometry. */
+body.brand-refresh .services-card-grid .service-card-body {
+  --service-curve-height: 108px;
+  position: relative;
+  z-index: 2;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 16px 15px 18px !important;
+  overflow: visible;
+  clip-path: none;
+  -webkit-clip-path: none;
+}
+
+body.brand-refresh .services-card-grid .service-card-body::before {
+  content: "" !important;
+  position: absolute;
+  inset: auto 0 calc(100% - 1px);
+  height: var(--service-curve-height);
+  background: inherit;
+  pointer-events: none;
+  clip-path: polygon(
+    0 0, 5% .8%, 10% 2.1%, 15% 4.4%, 20% 7.8%,
+    25% 12.1%, 30% 17.6%, 35% 23.8%, 40% 31%,
+    45% 39%, 50% 47.5%, 55% 56.3%, 60% 64.9%,
+    65% 72.6%, 70% 79.6%, 75% 85.5%, 80% 90.4%,
+    85% 94.3%, 90% 97.2%, 95% 99%, 100% 100%, 0 100%
+  );
+}
+
+body.brand-refresh .services-card-grid .service-card h3 {
+  line-height: 1.1 !important;
+  overflow-wrap: anywhere;
+}
+
+body.brand-refresh .services-card-grid .service-seo-description {
+  margin: 10px 0 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  body.brand-refresh .services-card-grid .service-card-body {
+    --service-curve-height: 100px;
+  }
+}
+
+@media (max-width: 760px) {
+  body.brand-refresh .services-card-grid .service-card-body {
+    --service-curve-height: 82px;
+    padding: 14px 12px 16px !important;
+  }
+}
