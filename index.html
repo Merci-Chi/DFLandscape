@@ -2162,7 +2162,7 @@
 
           <div class="testimonial-heading redesigned-heading">
 
-            <h2>What Our Clients Say</h2>
+            <h2>What Our Clients Say</h2>\n            <a class="customer-review-link" href="/review">Write a Review ★</a>
 
 
 
@@ -3390,6 +3390,106 @@
     <script src="js.js"></script>
 
     <script src="analytics.js?v=20261008-1" defer></script>
+
+<!-- Customer review overlay; /review opens this over the existing page. -->
+<div id="customerReviewOverlay" class="customer-review-overlay" hidden>
+  <div class="customer-review-backdrop" data-close-review></div>
+  <section class="customer-review-dialog" role="dialog" aria-modal="true" aria-labelledby="customerReviewTitle" tabindex="-1">
+    <button class="customer-review-close" type="button" data-close-review aria-label="Close review form">&times;</button>
+    <span class="customer-review-kicker">DESERT FOREST LANDSCAPE</span>
+    <h2 id="customerReviewTitle">Leave us a review</h2>
+    <p>How was your experience? Your feedback goes directly to our team.</p>
+    <form id="customerReviewForm">
+      <fieldset class="customer-review-stars"><legend>Your rating <span aria-hidden="true">*</span></legend>
+        <div class="customer-review-rating-options">
+          <label><input type="radio" name="rating" value="1" required><span aria-label="1 star">★</span></label>
+          <label><input type="radio" name="rating" value="2"><span aria-label="2 stars">★</span></label>
+          <label><input type="radio" name="rating" value="3"><span aria-label="3 stars">★</span></label>
+          <label><input type="radio" name="rating" value="4"><span aria-label="4 stars">★</span></label>
+          <label><input type="radio" name="rating" value="5"><span aria-label="5 stars">★</span></label>
+        </div>
+      </fieldset>
+      <label>Your name <input name="name" autocomplete="name" maxlength="120" required></label>
+      <label>Email <input type="email" name="email" autocomplete="email" required></label>
+      <label>Phone <input type="tel" name="phone" autocomplete="tel" required placeholder="(702) 555-0123"></label>
+      <label>Your review <textarea name="review" rows="4" minlength="10" maxlength="3000" required placeholder="Tell us about the work we did..."></textarea></label>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="customer-review-honeypot" aria-hidden="true">
+      <button class="customer-review-submit" type="submit">Send review</button>
+      <p id="customerReviewStatus" class="customer-review-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</div>
+<script>
+(() => {
+  const overlay = document.getElementById('customerReviewOverlay');
+  const dialog = overlay.querySelector('.customer-review-dialog');
+  const form = document.getElementById('customerReviewForm');
+  const status = document.getElementById('customerReviewStatus');
+  const submit = form.querySelector('[type=submit]');
+  let previousFocus = null;
+  let openedAt = Date.now();
+  const isReviewPath = () => /^\\/review\\/?$/.test(location.pathname);
+  function syncReview() {
+    const open = isReviewPath() || new URLSearchParams(location.search).has('review');
+    overlay.hidden = !open;
+    document.body.classList.toggle('review-modal-open', open);
+    if (open) { if (!previousFocus) previousFocus = document.activeElement; dialog.focus(); }
+    else if (previousFocus) { previousFocus.focus?.(); previousFocus = null; }
+  }
+  function openReview(e) {
+    if (e) e.preventDefault();
+    history.pushState({review:true}, '', '/review');
+    openedAt = Date.now();
+    syncReview();
+  }
+  function closeReview() {
+    if (!overlay.hidden) { history.pushState({}, '', '/'); syncReview(); }
+  }
+  document.querySelectorAll('a[href="/review"], a[href="/review/"]').forEach(a => a.addEventListener('click', openReview));
+  overlay.querySelectorAll('[data-close-review]').forEach(el => el.addEventListener('click',closeReview));
+  window.addEventListener('popstate',syncReview);
+  document.addEventListener('keydown',e => {
+    if (overlay.hidden) return;
+    if (e.key === 'Escape') { closeReview(); return; }
+    if (e.key === 'Tab') {
+      const focusable = [...dialog.querySelectorAll('button:not(:disabled),input:not([tabindex="-1"]),textarea')];
+      const first = focusable[0], last = focusable[focusable.length-1];
+      if (e.shiftKey && document.activeElement===first) {e.preventDefault();last.focus();}
+      else if (!e.shiftKey && document.activeElement===last) {e.preventDefault();first.focus();}
+    }
+  });
+  form.querySelectorAll('input[name=rating]').forEach(el=>el.addEventListener('change',()=>{
+    const n = Number(form.querySelector('input[name=rating]:checked')?.value || 0);
+    form.querySelectorAll('.customer-review-rating-options label').forEach((label,i)=>label.classList.toggle('selected',i<n));
+  }));
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const phone = String(data.get('phone')||'').trim();
+    if (phone.replace(/\\D/g,'').length < 10) { status.textContent='Please enter a valid phone number.';return; }
+    submit.disabled=true; status.textContent='Sending your review…';
+    try {
+      const response=await fetch('https://wfxuxrvygyzonkflpwoq.supabase.co/functions/v1/dfl-contact',{
+        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          name:String(data.get('name')).trim(),email:String(data.get('email')).trim(),phone,
+          message:'[Customer review — '+data.get('rating')+'/5 stars]\\n'+String(data.get('review')).trim(),
+          website:data.get('website')||'',elapsed_ms:Date.now()-openedAt
+        })
+      });
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||!result.ok) throw new Error(result.error||'Submission failed');
+      form.reset();form.querySelectorAll('.selected').forEach(el=>el.classList.remove('selected'));
+      status.textContent='Thank you! Your review has been sent to our team.';
+    } catch(err) {
+      status.textContent='We could not send your review. Please try again or call (702) 875-2616.';
+      console.error('Review submission failed',err);
+    } finally {submit.disabled=false;}
+  });
+  if (new URLSearchParams(location.search).has('review')) history.replaceState({review:true},'', '/review');
+  syncReview();
+})();
+</script>
 </body>
 
 </html>
