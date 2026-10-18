@@ -477,6 +477,18 @@
 
     <style id="review-card-layout">
 
+      #testimonials .testimonial-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      #testimonials .customer-review-link,
+      #testimonials .heading-divider {
+        margin: 0;
+      }
+
       /* Review area: 3 cards per page on desktop, 2 on tablet, 1 on mobile. */
 
       #testimonials .review-carousel-shell {
@@ -2156,7 +2168,8 @@
 
           <div class="testimonial-heading redesigned-heading">
 
-            <h2>What Our Clients Say</h2>\n            <a class="customer-review-link" href="/review">Write a Review ★</a>
+            <h2>What Our Clients Say</h2>
+            <a class="customer-review-link" href="/review">Write a Review ★</a>
 
 
 
@@ -3412,7 +3425,7 @@
   }catch(err){console.warn('Approved reviews unavailable',err);}
 })();
 </script>
-\n<!-- Customer review overlay; /review opens this over the existing page. -->
+<!-- Customer review overlay; /review opens this over the existing page. -->
 <div id="customerReviewOverlay" class="customer-review-overlay" hidden>
   <div class="customer-review-backdrop" data-close-review></div>
   <section class="customer-review-dialog" role="dialog" aria-modal="true" aria-labelledby="customerReviewTitle" tabindex="-1">
