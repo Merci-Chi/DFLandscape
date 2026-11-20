@@ -95,7 +95,7 @@
 
 
 
-    <link rel="stylesheet" href="css.css" />
+    <link rel="stylesheet" href="css.css?v=20261119-review-branding" />
 
 
 
@@ -2199,33 +2199,10 @@
 
                 <article class="review-card">
 
-                  <div class="review-card-top">
-
-                    <div
-
-                      class="review-platform review-platform-logo"
-
-                      aria-label="Nextdoor App recommendation"
-
-                    >
-
-                      <img
-
-                        src="icons/nextdoor.png"
-
-                        alt=""
-
-                        aria-hidden="true"
-
-                        class="nextdoor-review-logo"
-
-                      />
-
-                    </div>
-
-                  </div>
-
-
+                  <div class="review-card-top review-rating-header">
+  <img class="review-brand-logo" src="images/logo.png" alt="Desert Forest Landscape logo" loading="lazy">
+  <span class="review-rating-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+</div>
 
                   <p class="review-copy">
 
@@ -3412,13 +3389,18 @@
     for(const item of reviews){
       const article=document.createElement('article');article.className='review-card';
       const top=document.createElement('div');top.className='review-card-top';
-      const stars=document.createElement('span');stars.className='review-platform';stars.textContent='★'.repeat(item.rating)+'☆'.repeat(5-item.rating);
+      const logo=document.createElement('img');logo.className='review-brand-logo';logo.src='images/logo.png';logo.alt='Desert Forest Landscape logo';logo.loading='lazy';
+      const stars=document.createElement('span');stars.className='review-rating-stars';
+      const rating=Math.max(1,Math.min(5,Number(item.rating)||1));
+      stars.textContent='★'.repeat(rating)+'☆'.repeat(5-rating);
+      stars.setAttribute('role','img');stars.setAttribute('aria-label',rating+' out of 5 stars');
+      top.classList.add('review-rating-header');top.append(logo,stars);
       const copy=document.createElement('p');copy.className='review-copy';copy.textContent=item.review;
       const bottom=document.createElement('div');bottom.className='review-card-bottom';
       const author=document.createElement('div');author.className='review-author';
       const avatar=document.createElement('div');avatar.className='review-avatar';avatar.textContent=item.name.charAt(0).toUpperCase();
-      const meta=document.createElement('div');meta.className='review-author-meta';meta.textContent=item.name;
-      author.append(avatar,meta);bottom.append(author);top.append(stars);article.append(top,copy,bottom);
+      const meta=document.createElement('div');meta.className='review-author-meta';const name=document.createElement('strong');name.textContent=item.name;const source=document.createElement('span');source.textContent='Review submitted on this site';meta.append(name,source);
+      author.append(avatar,meta);bottom.append(author);article.append(top,copy,bottom);
       carousel.append(article);
     }
     if(reviews.length)window.dispatchEvent(new Event('resize'));
