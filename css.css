@@ -7830,3 +7830,12 @@ html {
 .customer-review-status{min-height:1.5em;margin:0!important;font-size:14px;}
 .customer-review-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;}
 body.review-modal-open{overflow:hidden;}
+
+/* Branded testimonial headers */
+#testimonials .review-card-top.review-rating-header{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:16px!important;width:100%!important;margin-bottom:18px!important}
+#testimonials .review-brand-logo{display:block!important;flex:0 0 auto!important;width:42px!important;height:42px!important;object-fit:contain!important}
+#testimonials .review-rating-stars{display:inline-flex!important;align-items:center!important;white-space:nowrap!important;color:#222!important;font-size:clamp(19px,2vw,25px)!important;font-weight:800!important;line-height:1!important;letter-spacing:1px!important}
+#testimonials .review-author-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+#testimonials .review-author-meta strong{font-weight:800}
+#testimonials .review-author-meta span{font-weight:400}
+@media(max-width:640px){#testimonials .review-card-top.review-rating-header{gap:12px!important}#testimonials .review-brand-logo{width:36px!important;height:36px!important}#testimonials .review-rating-stars{font-size:21px!important;letter-spacing:0!important}}
