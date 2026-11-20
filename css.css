@@ -847,7 +847,7 @@ main { padding-top: 162px; }
 }
 
 .compact-hero-image {
-  background: url('images/hero-vegas-landscaping.png') center 48% / cover no-repeat;
+  background: url('images/hero-vegas-landscaping.webp') center 48% / cover no-repeat;
   transform: scale(1.02);
 }
 
@@ -999,7 +999,7 @@ main { padding-top: 162px; }
 }
 
 .consultation-strip-bg {
-  background: url('images/consultation-vegas-landscaping.png') center 58% / cover no-repeat;
+  background: url('images/consultation-vegas-landscaping.webp') center 58% / cover no-repeat;
   transform: scale(1.025);
 }
 
@@ -1717,7 +1717,7 @@ body.brand-refresh .services-card-grid .service-card:nth-child(5) .service-card-
   bottom: 12px;
   width: 155px;
   height: 155px;
-  background: url('images/leaf.png') center/contain no-repeat;
+  background: url('images/leaf.webp') center/contain no-repeat;
   opacity: .22;
   transform: rotate(-18deg);
   pointer-events: none;
@@ -5575,7 +5575,7 @@ textarea {
     font-family: 'Inter', Arial, sans-serif;
     background:
       linear-gradient(180deg, rgba(2,34,22,.84), rgba(2,29,19,.96)),
-      url('images/mobile-footer-vegas-landscaping.png') center / cover no-repeat;
+      url('images/mobile-footer-vegas-landscaping.webp') center / cover no-repeat;
     border-top: 1px solid rgba(226,181,61,.55);
   }
 
@@ -7434,7 +7434,7 @@ body.brand-refresh .site-footer-expanded {
   body.brand-refresh .mobile-footer-reference {
     background:
       linear-gradient(180deg, rgba(8,40,28,.88), rgba(8,40,28,.97)),
-      url('images/mobile-footer-vegas-landscaping.png') center / cover no-repeat !important;
+      url('images/mobile-footer-vegas-landscaping.webp') center / cover no-repeat !important;
     border-top-color: var(--brand-orange-soft) !important;
   }
 
