@@ -7839,3 +7839,32 @@ body.review-modal-open{overflow:hidden;}
 #testimonials .review-author-meta strong{font-weight:800}
 #testimonials .review-author-meta span{font-weight:400}
 @media(max-width:640px){#testimonials .review-card-top.review-rating-header{gap:12px!important}#testimonials .review-brand-logo{width:36px!important;height:36px!important}#testimonials .review-rating-stars{font-size:21px!important;letter-spacing:0!important}}
+
+/* Keep the service cards only as tall as their content.
+   Preserve the image overlap, curved tops, color, and padding. */
+.services-card-grid {
+  align-items: start !important;
+}
+.services-card-grid .service-card {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+.services-card-grid .service-card-body {
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding-bottom: 20px !important;
+}
+@media (max-width: 1180px) {
+  .services-card-grid .service-card-body {
+    min-height: 0 !important;
+    padding-bottom: 18px !important;
+  }
+}
+@media (max-width: 760px) {
+  .services-card-grid .service-card-body {
+    min-height: 0 !important;
+    padding-bottom: 16px !important;
+  }
+}
