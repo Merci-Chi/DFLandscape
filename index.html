@@ -55,6 +55,7 @@
 
 
 
+    <link rel="preconnect" href="https://wfxuxrvygyzonkflpwoq.supabase.co" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
 
@@ -2200,7 +2201,7 @@
                 <article class="review-card">
 
                   <div class="review-card-top review-rating-header">
-  <img class="review-brand-logo" src="images/logo.png" alt="Desert Forest Landscape logo" loading="lazy">
+  <img class="review-brand-logo" src="icons/nextdoor.png" alt="Nextdoor logo" loading="lazy" decoding="async">
   <span class="review-rating-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
 </div>
 
@@ -3133,7 +3134,8 @@
             const img = document.createElement("img");
             img.src = photoUrl(photo.storage_path);
             img.alt = `${String(photo.label || "").toLowerCase() === "before" ? "Before landscaping work" : String(photo.label || "").toLowerCase() === "after" ? "After landscaping work" : "Landscaping project"} — Desert Forest Landscape, Las Vegas area`;
-            img.loading = "lazy";
+            img.loading = index === 0 ? "eager" : "lazy";
+            if (index === 0) img.fetchPriority = "high";
             img.decoding = "async";
 
             card.appendChild(img);
