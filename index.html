@@ -784,6 +784,45 @@
 
       }
 
+
+      /* Compact, equally sized testimonial cards with an ellipsis and
+         a gentle fade only for text that actually overflows. */
+      #testimonials .review-card {
+        height: 330px !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        padding: 24px !important;
+      }
+      #testimonials .review-copy {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 6 !important;
+        line-clamp: 6;
+        overflow: hidden !important;
+        flex: 0 1 auto !important;
+        line-height: 1.55 !important;
+        min-height: 0 !important;
+        margin-bottom: 12px !important;
+      }
+      #testimonials .review-copy.review-copy-truncated {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 79%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 79%, transparent 100%);
+      }
+      #testimonials .review-card-bottom {
+        flex: 0 0 auto !important;
+        margin-top: auto !important;
+      }
+      @media(max-width:640px) {
+        #testimonials .review-card {
+          height: 318px !important;
+          min-height: 0 !important;
+          padding: 20px !important;
+        }
+        #testimonials .review-copy {
+          -webkit-line-clamp: 5 !important;
+          line-clamp: 5;
+        }
+      }
     </style>
 
   
@@ -3506,6 +3545,34 @@
 })();
 </script>
 <script src="/hiring.js?v=20261119-merge-1" defer></script>
+<script>
+/* Only fade text when it is actually truncated; works for reviews added later. */
+(() => {
+  const root = document.getElementById('reviewCarousel');
+  if (!root) return;
+  const observed = new WeakSet();
+  const observer = typeof ResizeObserver === 'function'
+    ? new ResizeObserver(entries => {
+        for (const entry of entries) {
+          const el = entry.target;
+          el.classList.toggle('review-copy-truncated', el.scrollHeight > el.clientHeight + 2);
+        }
+      }) : null;
+  function inspect() {
+    root.querySelectorAll('.review-copy').forEach(el => {
+      if (observed.has(el)) return;
+      observed.add(el);
+      if (observer) observer.observe(el);
+      requestAnimationFrame(() => {
+        el.classList.toggle('review-copy-truncated', el.scrollHeight > el.clientHeight + 2);
+      });
+    });
+  }
+  inspect();
+  new MutationObserver(inspect).observe(root, { childList: true, subtree: true });
+  window.addEventListener('resize', inspect, {passive:true});
+})();
+</script>
 </body>
 
 </html>
